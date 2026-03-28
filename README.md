@@ -1,6 +1,6 @@
 # 100-Days Networking Challenge
 
-Preparing for a data center (RZ) team transition. From zero to solid networking skills in 100 days.
+Preparing for a RZ team transition. From zero to solid networking skills in 100 days.
 
 ## Sources
 
