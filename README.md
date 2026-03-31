@@ -18,7 +18,7 @@ Preparing for a RZ team transition. From zero to solid networking skills in 100 
 
 | # | Module | Days | Status |
 |---|--------|------|--------|
-| 01 | [Fundamentals, OSI, TCP/IP](modules/01-grundlagen/) | 1-10 | [ ] |
+| 01 | [Fundamentals, OSI, TCP/IP](modules/01-grundlagen/) | 1-10 | [~] Day 1/10 |
 | 02 | [Network Technology (Cables, WLAN, PoE)](modules/02-netzwerktechnik/) | 11-20 | [ ] |
 | 03 | [Ethernet & Switching (STP, VLAN, SDN)](modules/03-ethernet-switching/) | 21-30 | [ ] |
 | 04 | [IP Addressing & Subnetting](modules/04-ip-adressierung/) | 31-40 | [ ] |
