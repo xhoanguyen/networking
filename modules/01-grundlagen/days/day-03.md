@@ -7,11 +7,11 @@
 
 ## Kernkonzepte
 
-- [ ] Warum Schichtenmodelle? Abstraktion der Kommunikation
-- [ ] OSI-Modell: 7 Schichten (Physical → Application)
-- [ ] Datenfluss: virtuell horizontal, real vertikal (runter → Medium → rauf)
-- [ ] Jede Schicht hat eine klar definierte Aufgabe
-- [ ] Dordal-Perspektive: Schichten als Programmierschnittstellen (APIs)
+- [x] Warum Schichtenmodelle? Abstraktion der Kommunikation
+- [x] OSI-Modell: 7 Schichten (Physical → Application)
+- [x] Datenfluss: virtuell horizontal, real vertikal (runter → Medium → rauf)
+- [x] Jede Schicht hat eine klar definierte Aufgabe
+- [x] Dordal-Perspektive: Schichten als Programmierschnittstellen (APIs)
 
 ## Flashcards
 
@@ -33,5 +33,13 @@
 ## Mini-Quiz
 
 1. Auf welcher OSI-Schicht arbeitet ein Switch? Und ein Router?
+   > **Switch → Layer 2 (Data Link):** Arbeitet mit MAC-Adressen und leitet Frames im LAN weiter. **Router → Layer 3 (Network):** Arbeitet mit IP-Adressen und verbindet verschiedene Netzwerke miteinander (nicht nur Internet — auch Subnetze im RZ).
+   > *Quelle: Zisler Kap. 1.3; allgemeines Netzwerkwissen*
+
 2. Warum kritisiert Dordal das OSI-Modell als teilweise "undurchsichtig"?
+   > Die Schichten 5 (Session) und 6 (Presentation) sind unklar definiert und in der Praxis kaum von der Anwendungsschicht trennbar. Das OSI-Modell ist ein theoretisches Komitee-Produkt (ISO), während TCP/IP aus praktischer Implementierung entstand und mit 4 Schichten auskommt. Zudem arbeiten reale Geräte oft über mehrere Schichten hinweg (z.B. Layer-3-Switch).
+   > *Quelle: Dordal Kap. 1.1, 1.15*
+
 3. Welche Schicht ist für MAC-Adressen zuständig?
+   > **Layer 2 (Data Link)** — MAC-Adressen sind Hardware-Adressen der Netzwerkkarten. Der Switch nutzt sie, um Frames im LAN an das richtige Gerät weiterzuleiten.
+   > *Quelle: Zisler Kap. 1.3*
