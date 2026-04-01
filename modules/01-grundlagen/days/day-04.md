@@ -7,11 +7,11 @@
 
 ## Kernkonzepte
 
-- [ ] TCP/IP-Modell: 4 Schichten (Netzzugang, Internet, Transport, Anwendung)
-- [ ] Alternativ 5 Schichten: Physical + Data Link getrennt
-- [ ] Zusammenfassung: OSI Session+Presentation+Application = TCP/IP Application
-- [ ] OSI = theoretischer Standard, TCP/IP = praxisorientiert
-- [ ] IETF vs. ISO: "running code" vs. Komitee-Arbeit
+- [x] TCP/IP-Modell: 4 Schichten (Netzzugang, Internet, Transport, Anwendung)
+- [x] Alternativ 5 Schichten: Physical + Data Link getrennt
+- [x] Zusammenfassung: OSI Session+Presentation+Application = TCP/IP Application
+- [x] OSI = theoretischer Standard, TCP/IP = praxisorientiert
+- [x] IETF vs. ISO: "running code" vs. Komitee-Arbeit
 
 ## Flashcards
 
@@ -27,4 +27,9 @@
 ## Mini-Quiz
 
 1. Welche OSI-Schichten fasst das TCP/IP-Modell zur Anwendungsschicht zusammen?
+   > **Schichten 5 (Session), 6 (Presentation) und 7 (Application)** werden zur TCP/IP-Anwendungsschicht zusammengefasst. Ebenso werden Schicht 1 (Physical) und 2 (Data Link) zum Netzzugang zusammengefasst — ergibt 4 Schichten insgesamt.
+   > *Quelle: Zisler Kap. 1.3*
+
 2. Warum hat sich TCP/IP gegenüber dem OSI-Modell in der Praxis durchgesetzt?
+   > **Praxisnah** (IETF: "rough consensus and running code"), **früh verbreitet** (4.2BSD/Unix brachte TCP/IP kostenlos an Unis) und **iterativ verbessert** (offene RFCs). Während ISO noch am Standard schrieb, lief TCP/IP bereits im ARPANET.
+   > *Quelle: Dordal Kap. 1.15; Zisler Kap. 1.3*
