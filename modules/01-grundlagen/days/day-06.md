@@ -18,6 +18,12 @@ Aus Zisler Kap. 1.6 (S. 31):
 
 > Lösungen: Anhang B im Zisler-Buch
 
+## Zusätzliche Prüfungsfragen (Tag 1–5)
+
+1. Erklären Sie den Unterschied zwischen leitungsvermittelter und paketvermittelter Kommunikation. Nennen Sie je ein Beispiel.
+2. Ein Server im RZ ist nicht erreichbar. Beschreiben Sie anhand des TCP/IP-Schichtenmodells (4 Schichten) eine systematische Vorgehensweise zur Fehlersuche — nennen Sie pro Schicht ein konkretes Werkzeug.
+3. Ihre Leaf-Spine-Architektur im RZ basiert auf Mesh-Prinzipien. Erklären Sie, warum diese Topologie gegenüber einer klassischen Stern-Topologie Vorteile bei der Ausfallsicherheit bietet, und nennen Sie das Protokoll, das Schleifen in Layer-2-Netzen verhindert.
+
 ## Lab: Netzwerk-Interfaces erkunden
 
 **Ziel:** Die eigenen Netzwerk-Interfaces auf macOS kennenlernen.
