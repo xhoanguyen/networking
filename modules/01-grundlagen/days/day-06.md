@@ -51,6 +51,41 @@ Praxis im RZ: Von unten starten — ein Kabelproblem macht alles darüber kaputt
 - **Schleifen-Protokoll:** Spanning Tree Protocol (STP) blockiert redundante Layer-2-Pfade, um Broadcast-Schleifen zu verhindern. Modernere Variante: RSTP (Rapid STP)
 - In modernen Leaf-Spine-Netzen wird oft Layer-3 Routing (z.B. BGP) statt STP genutzt, damit alle Pfade gleichzeitig nutzbar sind
 
+## Abschlusstest Tag 1–6
+
+### Theorie-Fragen
+
+1. Nenne die 4 Schichten des TCP/IP-Modells und ordne jeder Schicht ein Protokoll zu, das du im RZ-Alltag antreffen würdest.
+2. Ein Kollege sagt: "Der Ping geht, aber `curl` liefert einen Timeout." Auf welcher TCP/IP-Schicht liegt das Problem vermutlich — und warum kannst du die unteren Schichten ausschließen?
+3. Was ist der Unterschied zwischen einem LAN und einem WAN? In welche Kategorie fällt die Verbindung zwischen zwei RZ-Standorten eurer Firma?
+4. Erkläre den Encapsulation-Prozess: Was passiert mit einem HTTP-Request, wenn er von der Application-Schicht bis zum Kabel wandert? Nenne die Bezeichnung der Dateneinheit pro Schicht.
+5. Warum hat der Ping zu `1.1.1.1` in deinem Lab einen niedrigeren TTL-Wert als der Ping zu deinem Gateway? Was sagt dir das über den Netzwerkpfad?
+6. Ein neuer Server im RZ bekommt keine IP-Adresse. Nenne zwei mögliche Ursachen und mit welchem Befehl du jeweils prüfen würdest, ob das Problem dort liegt.
+
+### Praktische Aufgaben
+
+- **P1:** Finde heraus, wie viele Hops zwischen deinem Rechner und `1.1.1.1` liegen.
+- **P2:** Prüfe, ob Port 443 auf `google.com` erreichbar ist — ohne Browser.
+- **P3:** Zeige die ARP-Tabelle deines Rechners an und finde die MAC-Adresse deines Gateways.
+
+### Antworten Theorie
+
+**1.** Application (HTTP) — Transport (TCP/UDP) — Internet (IP) — Network Access (Ethernet) ✅
+
+**2.** Ping nutzt ICMP (Internet-Schicht). Wenn Ping geht, funktionieren Internet- und Network-Access-Schicht. Problem liegt auf Transport- oder Application-Schicht (z.B. Port blockiert oder Dienst läuft nicht). ✅
+
+**3.** LAN = lokales Netz (Gebäude), WAN = weltweit. RZ-Verbindung: MAN wenn gleiche Stadt, WAN wenn verschiedene Städte. ✅
+
+**4.** _(offen — wird fortgesetzt)_
+
+**5.** _(offen)_
+
+**6.** _(offen)_
+
+### Antworten Praxis
+
+**P1–P3:** _(offen)_
+
 ## Lab: Netzwerk-Interfaces erkunden
 
 **Ziel:** Die eigenen Netzwerk-Interfaces auf macOS kennenlernen.
