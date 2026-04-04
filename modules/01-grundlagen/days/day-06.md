@@ -24,6 +24,33 @@ Aus Zisler Kap. 1.6 (S. 31):
 2. Ein Server im RZ ist nicht erreichbar. Beschreiben Sie anhand des TCP/IP-Schichtenmodells (4 Schichten) eine systematische Vorgehensweise zur Fehlersuche — nennen Sie pro Schicht ein konkretes Werkzeug.
 3. Ihre Leaf-Spine-Architektur im RZ basiert auf Mesh-Prinzipien. Erklären Sie, warum diese Topologie gegenüber einer klassischen Stern-Topologie Vorteile bei der Ausfallsicherheit bietet, und nennen Sie das Protokoll, das Schleifen in Layer-2-Netzen verhindert.
 
+### Antworten
+
+**1. Leitungsvermittelt vs. Paketvermittelt**
+
+- **Leitungsvermittelt:** Eine dedizierte Verbindung wird für die gesamte Kommunikation reserviert — exklusiv belegt, auch wenn gerade keine Daten fließen.
+  - Beispiel: klassisches Telefonnetz (PSTN)
+- **Paketvermittelt:** Daten werden in Pakete aufgeteilt, die unterschiedliche Wege nehmen können. Die Leitung wird gemeinsam genutzt (shared) — viel effizienter.
+  - Beispiel: Internet (IP-basiert)
+
+**2. Systematische Fehlersuche im TCP/IP-Modell (von unten nach oben)**
+
+| Schicht | Prüfe | Werkzeug |
+|---------|-------|----------|
+| **Network Access** | Kabel, Link-Status | `ethtool eth0` |
+| **Internet** | IP erreichbar? Route korrekt? | `ping` / `traceroute` |
+| **Transport** | Port offen? TCP-Verbindung? | `telnet host 443` / `ss -tlnp` |
+| **Application** | Antwortet der Dienst? | `curl` |
+
+Praxis im RZ: Von unten starten — ein Kabelproblem macht alles darüber kaputt.
+
+**3. Leaf-Spine vs. Stern-Topologie**
+
+- **Stern:** Ein zentraler Switch → Single Point of Failure
+- **Leaf-Spine:** Jeder Leaf-Switch ist mit jedem Spine-Switch verbunden → kein Single Point of Failure, immer genau 2 Hops, Bandbreite über alle Spines verteilt
+- **Schleifen-Protokoll:** Spanning Tree Protocol (STP) blockiert redundante Layer-2-Pfade, um Broadcast-Schleifen zu verhindern. Modernere Variante: RSTP (Rapid STP)
+- In modernen Leaf-Spine-Netzen wird oft Layer-3 Routing (z.B. BGP) statt STP genutzt, damit alle Pfade gleichzeitig nutzbar sind
+
 ## Lab: Netzwerk-Interfaces erkunden
 
 **Ziel:** Die eigenen Netzwerk-Interfaces auf macOS kennenlernen.
