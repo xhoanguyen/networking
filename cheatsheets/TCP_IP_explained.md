@@ -50,6 +50,48 @@ Die IP-Adresse (Stadt+Straße) bleibt gleich, aber die MAC-Adresse
 (Briefkasten) ändert sich bei jedem Hop — weil der Briefträger vor Ort
 immer nur den nächsten Briefkasten kennt.
 
+## Wo wird die Adresse hinzugefügt?
+
+Die Adresse wird nicht auf einmal draufgeschrieben — jede Schicht fügt ihren Teil hinzu:
+
+```
+Schicht 2 — Internet:    Ziel-IP auf den Umschlag (= Endziel, bleibt immer gleich)
+Schicht 1 — Netzzugang:  Ziel-MAC als lokales Etikett (= nächster Briefkasten, ändert sich pro Hop)
+```
+
+Beispiel: Mac (192.168.1.48) → Google (8.8.8.8):
+
+```
+Hop 1: Mac → Router
+        Ziel-IP:  8.8.8.8              (bleibt gleich)
+        Ziel-MAC: e4:c0:e2:56:cc:b0    (MAC des Routers)
+
+Hop 2: Router → ISP
+        Ziel-IP:  8.8.8.8              (bleibt gleich)
+        Ziel-MAC: aa:bb:cc:dd:ee:ff     (MAC des ISP-Routers)
+
+Hop 3: ISP → Google
+        Ziel-IP:  8.8.8.8              (bleibt gleich)
+        Ziel-MAC: 11:22:33:44:55:66     (MAC des Google-Servers)
+```
+
+## Encapsulation — Puppe in Puppe (Matrjoschka)
+
+Im echten Leben schreibt man Adresse + Inhalt auf einmal. Im Netzwerk
+verpackt jede Schicht die Daten der darüberliegenden Schicht in einen
+neuen Umschlag — ohne den Inhalt zu kennen:
+
+```
+[Ethernet-Header [IP-Header [TCP-Header [HTTP-Daten]]]]
+      ↑               ↑           ↑          ↑
+  Schicht 1       Schicht 2   Schicht 3   Schicht 4
+  MAC-Adressen    IP-Adressen Ports       Dein Request
+```
+
+Die bessere Post-Analogie: Du diktierst den Brief (Anwendung), gibst ihn
+der Poststelle (Transport), die gibt ihn der Logistik (Internet), die gibt
+ihn dem Briefträger (Netzzugang) — und keiner öffnet den Umschlag des anderen.
+
 ## Schlüsselbegriffe
 
 | Postweg | Netzwerk | Schicht |

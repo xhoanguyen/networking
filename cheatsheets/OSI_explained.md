@@ -67,6 +67,36 @@ OSI                          TCP/IP           Post-Analogie
 └─ 1 Bitübertrag.─┘ →  1 Netzzugang  →  Briefträger + Transportmittel
 ```
 
+## Wo wird die Adresse hinzugefügt?
+
+Die Adresse wird nicht auf einmal draufgeschrieben — jede Schicht fügt ihren Teil hinzu:
+
+```
+Schicht 3 — Vermittlung:  Ziel-IP auf den Umschlag (= Endziel, bleibt immer gleich)
+Schicht 2 — Sicherung:    Ziel-MAC als lokales Etikett (= nächster Briefkasten, ändert sich pro Hop)
+```
+
+Im echten Leben schreibst du die Adresse selbst auf den Brief (= alles in der Anwendung).
+Im Netzwerk kennt die Anwendung nur das Ziel — die unteren Schichten
+kümmern sich um IP und MAC, ohne den Inhalt zu kennen.
+
+## Encapsulation — Puppe in Puppe (Matrjoschka)
+
+Jede Schicht verpackt die Daten der darüberliegenden Schicht in einen
+neuen Umschlag — ohne den Inhalt zu kennen:
+
+```
+[Ethernet-Header [IP-Header [TCP-Header [HTTP-Daten]]]]
+      ↑               ↑           ↑          ↑
+  Schicht 2       Schicht 3   Schicht 4   Schicht 7
+  MAC-Adressen    IP-Adressen Ports       Dein Request
+```
+
+Die bessere Post-Analogie: Du diktierst den Brief (Schicht 7), gibst ihn
+der Sekretärin (Schicht 6-5), die gibt ihn der Poststelle (Schicht 4),
+die gibt ihn der Logistik (Schicht 3), die gibt ihn dem Briefträger
+(Schicht 2-1) — und keiner öffnet den Umschlag des anderen.
+
 ## Schlüsselbegriffe
 
 | Postweg | Netzwerk | Schicht |
