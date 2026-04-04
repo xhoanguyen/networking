@@ -77,3 +77,28 @@ ping -c 4 google.com
 **Fragen zum Nachdenken:**
 - Was passiert wenn du dein WLAN ausschaltest und den Ping wiederholst?
 - Welche OSI-Schichten sind an einem erfolgreichen `ping` beteiligt?
+
+## Lab-Ergebnisse
+
+### Interfaces (Aufgabe 1)
+- Ethernet/WLAN-Interface: `en0`
+- Aktuelle IP-Adresse: `192.168.1.48`
+- Bridge-Interface: `bridge100` (VMs im Netz `192.168.2.x`)
+
+### Gateway und DNS (Aufgabe 2)
+- Standard-Gateway: `192.168.1.1` (Router, über `en0`)
+- DNS-Server: `192.168.1.1` (Router leitet DNS-Anfragen weiter)
+
+### Ping-Tests (Aufgabe 3)
+
+| Ziel | Latenz (avg) | TTL | Was wird getestet |
+|------|-------------|-----|-------------------|
+| `192.168.1.1` (Router) | ~6ms | 64 | Lokales Netz — kein Gateway nötig |
+| `1.1.1.1` (Cloudflare) | ~29ms | 57 | Internet per IP — Gateway + Routing |
+| `google.com` (142.250.130.139) | ~37ms | 114 | Internet per Name — DNS + Gateway + Routing |
+
+**Beobachtungen:**
+- Latenz steigt mit Entfernung
+- TTL sinkt pro Hop (64 → 57 → 114, wobei Google bei 128 startet)
+- `google.com` wurde per DNS zu `142.250.130.139` aufgelöst bevor der Ping losging
+- Ping nutzt ICMP (Schicht 3) — kein TCP/UDP, keine Anwendungsschicht
