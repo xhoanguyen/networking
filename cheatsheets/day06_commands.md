@@ -135,7 +135,7 @@ round-trip min/avg/max/stddev = 4.400/5.879/9.350/2.022 ms
 | `time=4.400 ms` | Roundtrip-Zeit (hin + zurück) |
 | `0.0% packet loss` | Alle Pakete kamen an |
 
-### Drei Ping-Tests — von nah nach fern
+### Drei Ping-Tests: von nah nach fern
 
 ```bash
 ping -c 4 192.168.1.1    # 1. Gateway (lokal, ~6ms)

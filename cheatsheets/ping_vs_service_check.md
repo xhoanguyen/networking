@@ -1,13 +1,13 @@
-# Ping vs. Service Check — Why Ping Alone Is Not Enough
+# Ping vs. service check: why ping alone is not enough
 
-## The Problem
+## The problem
 
-Ping uses ICMP (Internet layer). Many servers and firewalls **block ICMP** but still serve traffic on TCP ports like 443 (HTTPS).
+Ping uses ICMP (Internet layer). Many servers and firewalls block ICMP but still serve traffic on TCP ports like 443 (HTTPS).
 
-**Ping success proves only one thing:** IP routing works.
-**Ping failure proves nothing definitive:** It could be a firewall rule, not a real outage.
+Ping success proves one thing: IP routing works.
+Ping failure proves nothing definitive. It could be a firewall rule, not a real outage.
 
-## Real-World Example: amazon.de
+## Real-world example: amazon.de
 
 ```bash
 # Ping → 100% packet loss
@@ -23,7 +23,7 @@ curl -I --connect-timeout 3 https://amazon.de
 
 Amazon blocks ICMP but serves HTTPS normally. The Internet layer (IP routing) works fine — only ICMP is filtered.
 
-## How to Tell: Firewall vs. Real Outage
+## Firewall vs. real outage
 
 | Check | Command | Result |
 |-------|---------|--------|
@@ -31,18 +31,18 @@ Amazon blocks ICMP but serves HTTPS normally. The Internet layer (IP routing) wo
 | Port reachable? | `curl -I --connect-timeout 3 https://host` | HTTP response → server lives, ICMP blocked |
 | Both fail? | — | Real connectivity problem |
 
-## Comparison: Fake Domain vs. Firewall Block
+## Fake domain vs. firewall block
 
 | | Fake domain | ICMP blocked (amazon.de) |
 |---|---|---|
 | `ping` | `Unknown host` | `100% packet loss` |
-| DNS | ❌ No resolution | ✅ Returns IP |
-| `curl` | ❌ Connection error | ✅ HTTP response |
+| DNS | No resolution | Returns IP |
+| `curl` | Connection error | HTTP response |
 | Cause | Domain does not exist | Firewall drops ICMP |
 
-## RZ Takeaway
+## RZ takeaway
 
-Never rely only on `ping` to check if a server is reachable. Always verify the **actual service port**:
+Don't rely only on `ping` to check if a server is reachable. Always check the actual service port:
 
 ```bash
 # Step 1: DNS check

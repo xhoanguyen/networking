@@ -1,4 +1,4 @@
-# Welche OSI-Schicht? — So findest du die Antwort
+# Welche OSI-Schicht? So findest du die Antwort
 
 ## Die Regel
 

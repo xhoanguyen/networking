@@ -43,7 +43,7 @@ Post liest Adresse, plant Route über 5 Städte      ← Internet
 Briefträger in jeder Stadt: "Welcher Briefkasten?"  ← Netzzugang
 ```
 
-## Wichtig: MAC-Adresse ändert sich, IP bleibt gleich
+## MAC-Adresse ändert sich, IP bleibt gleich
 
 In jeder Stadt wird der Brief in einen neuen lokalen Umschlag gesteckt.
 Die IP-Adresse (Stadt+Straße) bleibt gleich, aber die MAC-Adresse
@@ -52,7 +52,7 @@ immer nur den nächsten Briefkasten kennt.
 
 ## Wo wird die Adresse hinzugefügt?
 
-Die Adresse wird nicht auf einmal draufgeschrieben — jede Schicht fügt ihren Teil hinzu:
+Die Adresse wird nicht auf einmal draufgeschrieben. Jede Schicht fügt ihren Teil hinzu:
 
 ```
 Schicht 2 — Internet:    Ziel-IP auf den Umschlag (= Endziel, bleibt immer gleich)
@@ -75,11 +75,11 @@ Hop 3: ISP → Google
         Ziel-MAC: 11:22:33:44:55:66     (MAC des Google-Servers)
 ```
 
-## Encapsulation — Puppe in Puppe (Matrjoschka)
+## Encapsulation (Puppe in Puppe / Matrjoschka)
 
 Im echten Leben schreibt man Adresse + Inhalt auf einmal. Im Netzwerk
 verpackt jede Schicht die Daten der darüberliegenden Schicht in einen
-neuen Umschlag — ohne den Inhalt zu kennen:
+neuen Umschlag, ohne den Inhalt zu kennen:
 
 ```
 [Ethernet-Header [IP-Header [TCP-Header [HTTP-Daten]]]]
@@ -88,9 +88,9 @@ neuen Umschlag — ohne den Inhalt zu kennen:
   MAC-Adressen    IP-Adressen Ports       Dein Request
 ```
 
-Die bessere Post-Analogie: Du diktierst den Brief (Anwendung), gibst ihn
-der Poststelle (Transport), die gibt ihn der Logistik (Internet), die gibt
-ihn dem Briefträger (Netzzugang) — und keiner öffnet den Umschlag des anderen.
+Du diktierst den Brief (Anwendung), gibst ihn der Poststelle (Transport),
+die gibt ihn der Logistik (Internet), die gibt ihn dem Briefträger (Netzzugang)
+— und keiner öffnet den Umschlag des anderen.
 
 ## Schlüsselbegriffe
 
