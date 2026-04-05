@@ -76,15 +76,53 @@ Praxis im RZ: Von unten starten — ein Kabelproblem macht alles darüber kaputt
 
 **3.** LAN = lokales Netz (Gebäude), WAN = weltweit. RZ-Verbindung: MAN wenn gleiche Stadt, WAN wenn verschiedene Städte. ✅
 
-**4.** _(offen — wird fortgesetzt)_
+**4.** Encapsulation — von oben nach unten (TCP/IP):
 
-**5.** _(offen)_
+```
+Application  → Daten (Message)
+Transport    → TCP-Header + Daten         = Segment
+Internet     → IP-Header  + Segment       = Paket
+Network Acc. → MAC-Header + Paket + CRC   = Frame
+```
 
-**6.** _(offen)_
+Jede Schicht verpackt die Daten der darüberliegenden Schicht als Header (Layer 2 zusätzlich mit Trailer/CRC). Keine Schicht kennt den Inhalt der anderen — nur ihren eigenen Header.
+
+**5.** TTL (Time to Live) ist ein Hop-Zähler. Der Zielserver setzt beim Antworten einen Startwert — jeder Router auf dem Weg zieht 1 ab. Bei dir kommt der Rest an.
+
+Verschiedene Betriebssysteme setzen unterschiedliche Startwerte:
+- Linux / macOS / Cloudflare → starten mit TTL **64**
+- Windows / Google           → starten mit TTL **128**
+
+Aus dem Lab:
+```
+Gateway (192.168.1.1) → TTL 64  → 64 - 64 = 0 Hops  (direkt im Heimnetz)
+1.1.1.1 (Cloudflare)  → TTL 57  → 64 - 57 = 7 Hops
+google.com            → TTL 114 → 128 - 114 = 14 Hops
+```
+
+TTL verhindert außerdem Routing-Schleifen: fällt der Zähler auf 0, wird das Paket verworfen.
+
+**6.** _(offen — kommt wenn DHCP behandelt wird)_
 
 ### Antworten Praxis
 
-**P1–P3:** _(offen)_
+**P1:** 9 Hops bis `1.1.1.1` (traceroute):
+```
+1  192.168.100.1 (Gateway)
+2-6  inetia.pl (ISP, routing durch Polen: Wrocław → Warszawa)
+7  * * * (Router antwortet nicht — Firewall blockt Traceroute-Probes, normal)
+8  162.158.100.67 / .61 (Cloudflare Edge — zwei IPs = Load Balancing)
+9  one.one.one.one (1.1.1.1)
+```
+
+**P2:** Port 443 auf `google.com` erreichbar — `HTTP/2 301` (Redirect → www.google.com). Server antwortet, ICMP-Block wäre hier kein Problem gewesen. `alt-svc: h3` zeigt dass Google auch HTTP/3 (QUIC) anbietet.
+
+**P3:** ARP-Tabelle:
+```
+192.168.100.1   → 60:de:f3:44:ae:98  (Gateway)
+192.168.100.255 → ff:ff:ff:ff:ff:ff  (Broadcast)
+224.0.0.251     → 01:00:5e:00:00:fb  (mDNS Multicast — Apple-Dienste)
+```
 
 ## Lab: Netzwerk-Interfaces erkunden
 
@@ -164,3 +202,32 @@ ping -c 4 google.com
 - TTL sinkt pro Hop (64 → 57 → 114, wobei Google bei 128 startet)
 - `google.com` wurde per DNS zu `142.250.130.139` aufgelöst bevor der Ping losging
 - Ping nutzt ICMP (Schicht 3) — kein TCP/UDP, keine Anwendungsschicht
+
+---
+
+## Wissenseinschätzung Tag 1–6
+
+### Stufe 1 — Must (ohne nachzuschauen)
+
+- **TCP/IP 4 Schichten + was dort passiert** — Anwendung → Transport → Internet → Netzzugang, jeder Schicht ein Protokoll zuordnen (HTTP, TCP/UDP, IP, Ethernet)
+- **Encapsulation-Prinzip** — jede Schicht verpackt die Daten der darüberliegenden; Dateneinheiten: Message → Segment → Paket → Frame
+- **Paketvermittlung vs. Leitungsvermittlung** — Unterschied + warum Paketvermittlung ausfallsicherer ist
+- **Switch vs. Router** — Switch = Layer 2 (MAC), Router = Layer 3 (IP)
+- **Ping-Diagnose-Kette** — Gateway → `1.1.1.1` → `google.com` und was jeder Test ausschließt
+
+### Stufe 2 — Should
+
+- **OSI 7 Schichten** benennen (Eselsbrücke: Please Do Not Throw Sausage Pizza Away)
+- **TTL-Konzept** — Startwert je nach OS (64 oder 128), jeder Hop zieht 1 ab, Hops berechnen
+- **LAN / MAN / WAN** unterscheiden
+- **`ping` vs. `curl`** — warum Ping-Erfolg nicht Service-Erfolg bedeutet
+- **ARP-Tabelle lesen** — IP → MAC zuordnen
+
+### Stufe 3 — Great
+
+- **Traceroute-Output interpretieren** — Hops zählen, `* * *` erklären, Load-Balancing erkennen
+- **Mesh vs. Stern-Topologie** + STP
+- **Offener Standard vs. proprietäres Protokoll** erklären können
+- **Historischer Kontext** — Baran vs. Davies, 4.2BSD
+
+> Stufe 1 realistisch nach 2–3 Monaten Wiederholung sicher. Stufe 2 mit den Labs. Stufe 3 kommt von selbst durch Anwendung.
