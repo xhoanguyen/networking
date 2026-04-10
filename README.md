@@ -16,18 +16,20 @@ Preparing for a RZ team transition. From zero to solid networking skills in 100 
 
 ## Modules & Progress
 
+> Ausgerichtet auf den RZ-Stack: RKE2, Cilium, MetalLB, HAProxy, Istio, VictoriaMetrics
+
 | # | Module | Days | Status |
 |---|--------|------|--------|
-| 01 | [Fundamentals, OSI, TCP/IP](modules/01-grundlagen/) | 1-10 | [x] Done |
-| 02 | [Network Technology (Cables, WLAN, PoE)](modules/02-netzwerktechnik/) | 11-20 | [ ] |
-| 03 | [Ethernet & Switching (STP, VLAN, SDN)](modules/03-ethernet-switching/) | 21-30 | [ ] |
-| 04 | [IP Addressing & Subnetting](modules/04-ip-adressierung/) | 31-40 | [ ] |
-| 05 | [Addressing in Practice (DHCP, DNS, ARP)](modules/05-adressen-praxis/) | 41-50 | [ ] |
-| 06 | [Routing (Static, Dynamic, BGP)](modules/06-routing/) | 51-60 | [ ] |
-| 07 | [TCP, UDP, Ports, Firewalls](modules/07-tcp-udp-firewalls/) | 61-70 | [ ] |
-| 08 | [Application Protocols (HTTP, SSH, TLS)](modules/08-anwendungsprotokolle/) | 71-78 | [ ] |
-| 09 | [Network Practice & Security](modules/09-netzwerkpraxis-sicherheit/) | 79-88 | [ ] |
-| 10 | [K8s Networking (CNI, CoreDNS, Ingress)](modules/10-k8s-networking/) | 89-100 | [ ] |
+| 01 | [Grundlagen (OSI, TCP/IP, DNS)](modules/01-grundlagen/) | 1-10 | [x] Done |
+| 02 | [Linux Networking (ip, netns, veth, bridges)](modules/02-linux-networking/) | 11-20 | [ ] |
+| 03 | [Ethernet, IP & Subnetting](modules/03-ethernet-ip-subnetting/) | 21-30 | [ ] |
+| 04 | [Routing & BGP (FRRouting)](modules/04-routing-bgp/) | 31-40 | [ ] |
+| 05 | [TCP/UDP & DNS/CoreDNS](modules/05-tcp-dns/) | 41-50 | [ ] |
+| 06 | [Load Balancing — HAProxy & MetalLB](modules/06-loadbalancing/) | 51-60 | [ ] |
+| 07 | [K8s Networking Basics (CNI, Services, Ingress)](modules/07-k8s-basics/) | 61-70 | [ ] |
+| 08 | [Cilium & eBPF](modules/08-cilium-ebpf/) | 71-80 | [ ] |
+| 09 | [Service Mesh — Istio & OPA Gatekeeper](modules/09-istio-opa/) | 81-90 | [ ] |
+| 10 | [Observability & End-to-End (VictoriaMetrics)](modules/10-observability/) | 91-100 | [ ] |
 
 ## Module Structure
 
