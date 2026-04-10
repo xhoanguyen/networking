@@ -17,6 +17,12 @@
 
 **Warum:** Jeder Pod, jeder Service, jedes Cilium-Feature baut auf Linux-Netzwerk-Primitives auf.
 
+**Quellen:**
+- **LARTC** (Linux Advanced Routing & Traffic Control) — Hauptquelle für ip, Routing, Namespaces
+- **Dordal Kap. 6** — Verbindungen, Interfaces, Encoding
+- **Peterson & Davie Kap. 1** — Systems-Perspektive (optionale Vertiefung)
+- **Tanenbaum Kap. 1.4–1.5** — Protokollschichten (optionale Vertiefung)
+
 **Themen:**
 - `ip addr`, `ip link`, `ip route`, `ip neigh`
 - Network Namespaces (`ip netns`) — das Fundament von Container-Networking

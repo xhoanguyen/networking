@@ -20,11 +20,17 @@ cat /etc/os-release
 
 ## Lesen (20 Min)
 
-Lies den folgenden Abschnitt — er gibt dir Kontext bevor wir die Commands ausprobieren:
+Lies einen der folgenden Abschnitte — er gibt dir Kontext bevor wir die Commands ausprobieren:
 
-- **Dordal Kap. 6** — Verbindungen, Interfaces, Encoding (S. 1-15)
+**Theorie (wähle eine Quelle):**
+- **Dordal Kap. 6** — Verbindungen, Interfaces, Encoding
+- **Tanenbaum Kap. 1.4–1.5** — Protokollschichten, Standardisierung (präziser, akademischer)
+- **Peterson & Davie Kap. 1.1–1.3** — Systems-Perspektive, warum Schichten existieren (empfohlen wenn du das "Warum" verstehen willst)
 
-Fokus: Was ist ein Netzwerk-Interface? Was ist der Unterschied zwischen physischem Interface und virtuellem Interface?
+**Praxis (Pflicht für dieses Modul):**
+- **LARTC — Linux Advanced Routing & Traffic Control** — das Standardwerk für `ip`, Routing, Namespaces. Von den iproute2-Entwicklern selbst. Kostenlos online: suche nach "LARTC Linux Advanced Routing Traffic Control".
+
+Fokus: Was ist ein Netzwerk-Interface? Was ist der Unterschied zwischen physischem und virtuellem Interface?
 
 ## Lab: ip-Commands (30 Min)
 
