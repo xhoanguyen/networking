@@ -41,10 +41,6 @@ modules/XX-topic/
     └── lab-XX.md
 ```
 
-## Conventions
-
-- Commit messages: short and simple (e.g. `finish modul 1`) — no Co-Authored-By lines
-
 ## Tools (macOS)
 
 ```bash
@@ -60,3 +56,7 @@ ping, traceroute, netstat, tcpdump  # pre-installed
 # K8s lab (Module 10)
 brew install kind kubectl helm
 ```
+
+---
+
+Co-Author: [Claude Code](https://claude.ai/code)
