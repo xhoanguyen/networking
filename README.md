@@ -6,6 +6,9 @@ Preparing for a RZ team transition. From zero to solid networking skills in 100 
 
 - **Primary:** Harald Zisler — *Computer-Netzwerke* (8th edition, 456 pages)
 - **Deep Dive:** Peter Dordal — *Rechnernetze – Das umfassende Lehrbuch* (1st edition, 2023)
+- **Systems Perspective:** Peterson & Davie — *Computer Networks: A Systems Approach*
+- **Reference:** Tanenbaum & Wetherall — *Computer Networks* (5th edition)
+- **Linux Networking:** LARTC — *Linux Advanced Routing & Traffic Control*
 
 ## Daily Routine
 
