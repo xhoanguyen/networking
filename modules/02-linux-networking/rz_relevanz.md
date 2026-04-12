@@ -36,3 +36,9 @@ Pods haben IPs aus dem PodCIDR (z.B. `10.244.x.x`) — außerhalb des Clusters u
 Multipass nutzt `bridge100` — dasselbe Konzept steckt in K8s:
 - Jeder Pod ist über ein veth pair mit einer Linux Bridge auf dem Node verbunden
 - CNI (Cilium) konfiguriert diese Verbindungen automatisch
+
+### Routing-Tabellen (aus LARTC)
+Linux verwaltet intern drei Routing-Tabellen: `local`, `main`, `default`. `ip route show` zeigt nur `main`. Im RZ relevant bei Policy Routing — z.B. wenn Traffic von verschiedenen Interfaces unterschiedlich geroutet werden soll (Modul 04).
+
+### ARP-Einträge verfallen nach ~15 Minuten
+Bei MetalLB L2-Mode: wenn ein Node ausfällt und ein anderer die LoadBalancer-IP übernimmt, müssen alle Geräte im Netz ihren ARP-Cache aktualisieren. Bis das passiert (~15 Min oder bei Gratuitous ARP sofort) kann Traffic verloren gehen.

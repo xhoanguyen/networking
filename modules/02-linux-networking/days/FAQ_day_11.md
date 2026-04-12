@@ -120,6 +120,38 @@ Analogie: `ip link show` = Liste deiner eigenen Türen. `ip route show` = Karte 
 
 ---
 
+## Ergänzungen aus LARTC
+
+**Warum trennt iproute2 `ip link` und `ip addr`?**
+
+Das ist kein Zufall — es spiegelt das OSI-Modell direkt wider:
+- `ip link` = Layer 2 — Hardware (MAC-Adresse, MTU, physikalischer Zustand)
+- `ip addr` = Layer 3 — Software (IP-Adressen)
+
+`ifconfig` vermischt beides. `ip` hält die Schichten sauber getrennt, genau wie das OSI-Modell es vorgibt.
+
+---
+
+**Welche Routing-Tabellen hat Linux standardmäßig?**
+
+Linux verwaltet drei Routing-Tabellen intern:
+
+| Tabelle | Inhalt |
+|---|---|
+| `local` | Loopback und lokale Adressen |
+| `main` | Standard-Routen — das was `ip route show` anzeigt |
+| `default` | Normalerweise leer |
+
+`ip route show` zeigt immer nur die `main`-Tabelle. Die anderen werden mit `ip route show table local` etc. sichtbar. Mehrere Tabellen werden in Modul 04 relevant (Policy Routing).
+
+---
+
+**Wann verfallen ARP-Einträge?**
+
+`STALE` bedeutet nicht kaputt — nur nicht kürzlich genutzt. Einträge verfallen nach ~15 Minuten ohne Kommunikation. Beim nächsten Paket prüft Linux automatisch nach ob die MAC-Adresse noch stimmt. Erst wenn keine Antwort kommt wechselt der Status auf `FAILED`.
+
+---
+
 ## Reflexionsfragen
 
 **Was ist der Unterschied zwischen `ip addr` und `ifconfig`?**
