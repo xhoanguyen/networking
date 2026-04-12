@@ -1,5 +1,11 @@
 # Tag 11 — Linux Networking: Erste Schritte mit Multipass
 
+## What are we doing today and why?
+
+Wir richten unsere Linux-Umgebung ein und lernen die grundlegenden Netzwerk-Commands kennen die auf jedem Linux-System — und damit auf jedem RKE2-Node — verfügbar sind.
+
+**Warum:** Jeder Pod, jeder Service, jedes Cilium-Feature baut auf Linux-Netzwerk-Primitives auf. Wer `ip addr`, `ip route` und `ip neigh` nicht lesen kann, debuggt im Dunkeln. Das sind keine Theorie-Commands — das ist tägliches Handwerkszeug im RZ.
+
 ## Setup (einmalig, ~15 Min)
 
 Heute installieren wir Multipass und starten unsere erste Ubuntu-VM — die Umgebung die wir für Modul 02 durchgehend nutzen.
