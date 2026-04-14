@@ -195,3 +195,25 @@ ping -M do -s 1473 -c 1 8.8.8.8    # 1 Byte zu viel → sollte fehlschlagen
 - [ ] Verstehe ich die ARP-Zustandsmaschine (REACHABLE → STALE → PROBE)?
 - [ ] Kann ich MTU-Probleme mit `ping -M do` testen?
 - [ ] Weiß ich warum Gratuitous ARP bei Failover-Szenarien wichtig ist?
+
+## Faustregeln
+
+**Debugging-Einstieg:**
+- Problem im selben Subnetz → `ip neigh show`
+- Problem außerhalb → `ip route get <ziel-ip>`
+
+**Routing lesen:**
+- `ip route show` → nur `main`-Tabelle
+- `ip route show table all` → alles
+- Kein `via` in einer Route → direkt erreichbar, kein Gateway nötig
+
+**ARP:**
+- `REACHABLE` → frisch bestätigt
+- `STALE` → veraltet, wird beim nächsten Paket still geprüft
+- `FAILED` → nicht erreichbar
+- Gratuitous ARP → proaktive Cache-Aktualisierung bei Failover
+
+**MTU:**
+- Ping geht, große Transfers hängen → MTU-Problem
+- Ethernet Standard: 1500 Bytes
+- Mit VXLAN/Cilium: ~1450 Bytes
