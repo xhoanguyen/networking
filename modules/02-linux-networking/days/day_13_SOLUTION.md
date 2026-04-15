@@ -159,7 +159,82 @@ Liegt auf `lo`.
 
 ## Block C — Routing (ip route)
 
-_noch offen_
+**C1 ★**
+
+```bash
+ip route show | grep default
+```
+
+```
+default via 192.168.2.1 dev enp0s1 proto dhcp src 192.168.2.2 metric 100
+```
+
+- `default via 192.168.2.1` — alles ohne explizite Route geht über diesen Gateway
+- `dev enp0s1` — Interface
+- `proto dhcp` — Route wurde vom DHCP-Client eingetragen (nicht manuell)
+- `src 192.168.2.2` — Source-IP für ausgehende Pakete
+
+---
+
+**C2 ★**
+
+```bash
+ip route get 8.8.8.8
+```
+
+```
+8.8.8.8 via 192.168.2.1 dev enp0s1 src 192.168.2.2 uid 1000
+    cache
+```
+
+Kernel antwortet direkt ohne Pakete zu schicken: Gateway `192.168.2.1`, Interface `enp0s1`, Source `192.168.2.2`.
+
+---
+
+**C3 ★★**
+
+```bash
+ip route show >> backup.txt
+sudo ip route add 10.99.0.0/24 via 192.168.2.1 dev enp0s1
+ip route show | grep 10.99
+sudo ip route del 10.99.0.0/24
+```
+
+Manuelle Route hat kein `proto`, kein `src`, kein `metric` — der Kernel trägt nur ein was man ihm sagt.
+
+---
+
+**C4 ★★**
+
+```bash
+ip route show table local
+```
+
+```
+local 127.0.0.0/8 dev lo proto kernel scope host src 127.0.0.1
+local 127.0.0.1 dev lo proto kernel scope host src 127.0.0.1
+broadcast 127.255.255.255 dev lo proto kernel scope link src 127.0.0.1
+local 192.168.2.2 dev enp0s1 proto kernel scope host src 192.168.2.2
+broadcast 192.168.2.255 dev enp0s1 proto kernel scope link src 192.168.2.2
+```
+
+Drei Typen: `local` (eigene IPs), `broadcast` (Broadcast-Adressen). `scope host` = Paket verlässt nie das Interface, Kernel erkennt "das bin ich".
+
+---
+
+**C5 ★★★**
+
+```bash
+ip rule show
+```
+
+```
+0:      from all lookup local
+32766:  from all lookup main
+32767:  from all lookup default
+```
+
+Reihenfolge: local → main → default. Niedrigere Priorität = zuerst geprüft. `main` ist die normale Routing-Tabelle (`ip route show`). `default` ist meist leer.
 
 ---
 
