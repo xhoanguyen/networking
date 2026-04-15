@@ -99,7 +99,61 @@ TX errors: aborted   fifo  window heartbt transns
 
 ## Block B — IP-Adressen verwalten (ip addr)
 
-_noch offen_
+**B1 ★**
+
+```bash
+ip -4 -br addr show
+```
+
+```
+lo               UNKNOWN        127.0.0.1/8
+enp0s1           UP             192.168.2.2/24 metric 100
+```
+
+---
+
+**B2 ★★**
+
+```bash
+sudo ip addr add 192.168.99.1/24 dev enp0s1
+ip addr show enp0s1
+sudo ip addr del 192.168.99.1/24 dev enp0s1
+```
+
+Ja, Linux erlaubt mehrere IPs pro Interface. Use Cases: HA mit Virtual IPs (Keepalived), MetalLB im RZ.
+
+Unterschiede zwischen DHCP-IP und manueller IP:
+- `dynamic` + `valid_lft 2360sec` → kam von DHCP, Lease läuft ab
+- keine `dynamic` + `valid_lft forever` → manuell gesetzt, kein Ablaufdatum
+- DHCP-IP hat `brd` (Broadcast) und `metric`, manuelle nicht automatisch
+
+---
+
+**B3 ★★**
+
+```bash
+ip -j addr show enp0s1 | jq '.[0].addr_info[] | select(.family=="inet") | .local'
+```
+
+```
+"192.168.2.2"
+```
+
+Das Wichtige: `ip -j` gibt JSON aus und kann damit gescriptet werden. Die `jq`-Syntax selbst ist Nachschlagewerk.
+
+---
+
+**B4 ★★★**
+
+```bash
+ip addr show | grep 127.0.0.1
+```
+
+```
+inet 127.0.0.1/8 scope host lo
+```
+
+Liegt auf `lo`.
 
 ---
 
