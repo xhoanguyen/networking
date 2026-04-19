@@ -35,7 +35,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 02 — Linux Networking
-**Tag:** 16 — Linux Bridge (IN PROGRESS)
+**Tag:** 17 — nächstes Thema (TODO)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -74,52 +74,15 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 - Connected Route wird automatisch vom Kernel angelegt
 - NO-CARRIER wenn Gegenstück DOWN ist
 
----
-
-## Tag 16 — Linux Bridge (HIER WEITERMACHEN)
-
-**Ziel:** Drei Namespaces über eine Linux Bridge verbinden (L2-Switch-Prinzip)
-
-**Konzept:**
-- Bridge = virtueller L2-Switch im Kernel
-- Bridge braucht eine IP um selbst als Gateway zu fungieren
-- veth pairs verbinden Namespaces mit der Bridge
-- Bridge-Seite des veth = Port der Bridge (`master`-Keyword)
-- `man ip-link` ist die Primärquelle für Bridge-Befehle
-
-**VM-Stand (wo wir aufgehört haben):**
-
-```
-# Bridge
-br0: UP, IP 10.0.0.1/24
-
-# Namespaces
-ns1, ns2, ns3: erstellt
-
-# veth pairs (erstellt, aber noch nicht vollständig konfiguriert)
-veth-ns1  <-->  veth-ns1-br
-veth-ns2  <-->  veth-ns2-br
-veth-ns3  <-->  veth-ns3-br
-```
-
-**Nächster Schritt:**
-
-Bridge-Enden der veth pairs als Ports an `br0` hängen:
-
-```bash
-ip link set veth-ns1-br master br0
-ip link set veth-ns2-br master br0
-ip link set veth-ns3-br master br0
-```
-
-Danach:
-1. Bridge-Enden UP bringen (`veth-ns1-br`, `veth-ns2-br`, `veth-ns3-br`)
-2. Namespace-Enden in die Namespaces verschieben (`ip link set veth-ns1 netns ns1`, usw.)
-3. IPs in den Namespaces vergeben (z.B. `10.0.0.11/24` in ns1, `10.0.0.12/24` in ns2, `10.0.0.13/24` in ns3)
-4. Namespace-Interfaces UP bringen
-5. Ping zwischen ns1 und ns2 testen
-
-**Lernziel:** Verstehen warum der Ping funktioniert — welche Schicht entscheidet (L2 vs L3)?
+### Tag 16 ✅ — Linux Bridge
+- Bridge = virtueller L2-Switch im Kernel (`ip link add name br0 type bridge`)
+- Bridge-Enden der veth pairs via `master`-Keyword als Ports enslaven
+- `bridge link show` zeigt Ports und deren State (`forwarding`, `disabled`)
+- `bridge fdb show` zeigt die MAC-Adress-Tabelle (Forwarding Database)
+- Bridge lernt MACs dynamisch — dynamische Einträge verschwinden nach Timeout (~300s)
+- Unknown Unicast Flooding: unbekannte MACs werden an alle Ports geflutet
+- Ping zwischen Namespaces läuft auf L2 — kein Routing nötig solange gleicher Subnet
+- `man ip-link` und `man bridge` sind die Primärquellen
 
 ---
 
