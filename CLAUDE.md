@@ -86,6 +86,25 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 
 ---
 
+## Modul 3 — Plan (Dateien werden bei Bedarf erstellt)
+
+Stack-Kontext: RKE2, Cilium (CNI), MetalLB, HAProxy, Istio, OPA Gatekeeper, Ceph — kein IPv6
+
+| Tag | Thema |
+|-----|-------|
+| 21 | VLANs (802.1Q) — Node-Netzwerke im RZ |
+| 22 | Bonding / LACP — HA NICs |
+| 23 | tcpdump tief — Paketanalyse im RZ |
+| 24 | eBPF Grundlagen — Fundament für Cilium |
+| 25 | VXLAN / Overlay-Netzwerke |
+| 26 | Cilium Architektur — wie euer CNI wirklich funktioniert |
+| 27 | MetalLB + HAProxy — L4 Load Balancing im Stack |
+| 28 | Istio Grundlagen — Service Mesh, mTLS, Sidecar |
+| 29 | Kubernetes Netzwerk-Debugging — kubectl, Hubble, tcpdump im Cluster |
+| 30 | Final Exam Modul 3 |
+
+---
+
 ## Dateien
 
 | Datei | Inhalt |
