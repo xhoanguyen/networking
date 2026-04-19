@@ -42,6 +42,21 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 
 ## Abgeschlossene Tage
 
+### Tag 11 ✅ — Erste Schritte mit Multipass
+- Multipass installiert, VM `rz-node` aufgesetzt (2 CPU, 2G RAM, 10G Disk)
+- Erste `ip`-Commands: `ip link`, `ip addr`, `ip route`, `ip neigh`, `ss -tuln`
+- Interface heißt `enp0s1` (nicht `eth0`)
+- Unterschied `lo` vs. physisches Interface verstanden
+- `ping` und `traceroute` als erste Connectivity-Tests
+
+### Tag 12 ✅ — Linux Routing & ARP vertiefen
+- Linux hat drei Routing-Tabellen: `local`, `main`, `default`
+- `ip route show` zeigt nur `main` — `ip route show table all` zeigt alles
+- Longest Prefix Match: `/32` schlägt `/24` schlägt `/0`
+- ARP-Zustandsmaschine: `REACHABLE` → `STALE` → `DELAY` → `PROBE` → `FAILED`
+- Gratuitous ARP: proaktive Cache-Aktualisierung bei Failover (relevant für MetalLB L2-Mode)
+- MTU-Debugging: `ping -M do -s 1472` — kleiner Ping geht, große Transfers hängen = MTU-Problem
+
 ### Tag 13 ✅ — Der `ip`-Befehl: Komplett-Training
 - **Block A** — `ip link`: Interfaces lesen, Statistiken (-s -h), MAC, promisc, up/down
 - **Block B** — `ip addr`: IPs anzeigen, hinzufügen/entfernen, JSON + jq, `ip addr get`
