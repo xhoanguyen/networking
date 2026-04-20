@@ -42,3 +42,18 @@ Linux verwaltet intern drei Routing-Tabellen: `local`, `main`, `default`. `ip ro
 
 ### ARP-Einträge verfallen nach ~15 Minuten
 Bei MetalLB L2-Mode: wenn ein Node ausfällt und ein anderer die LoadBalancer-IP übernimmt, müssen alle Geräte im Netz ihren ARP-Cache aktualisieren. Bis das passiert (~15 Min oder bei Gratuitous ARP sofort) kann Traffic verloren gehen.
+
+---
+
+## Tag 17 — iptables & Security-Schichten
+
+### iptables ist das Fundament — aber nicht alles
+
+| Schicht | Tool | Was es schützt |
+|---------|------|----------------|
+| L3/L4 Host | `iptables` | IP/Port-Filterung auf dem Node |
+| L3/L4/L7 Pods | Cilium NetworkPolicy | Zwischen Pods — auch HTTP-Methoden, DNS |
+| mTLS | Istio | Verschlüsselte Service-zu-Service Verbindungen, Zertifikate |
+| K8s API | OPA Gatekeeper | Policy-Enforcement auf Kubernetes-Ebene |
+
+**Merksatz:** iptables ist das Fundament — aber im RZ baut man darauf auf, nicht damit allein.
