@@ -100,26 +100,13 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 
 ## Übergang Modul 2 → Modul 3
 
-Nach Tag 20 (Final Exam): ehrliche Auswertung — was sitzt, was nicht. Themen die wackeln werden gezielt wiederholt bevor Modul 3 startet. Kein Weitermachen auf wackligem Fundament.
+Nach Tag 20 (Final Exam):
+1. Ehrliche Auswertung — was sitzt, was nicht
+2. Lücken identifizieren und gezielt wiederholen
+3. Erst dann gemeinsam Plan für Tage 21–30 erstellen — basierend auf dem echten Stand, nicht auf einem fixen Plan
 
----
-
-## Modul 3 — Plan (Dateien werden bei Bedarf erstellt)
-
-Stack-Kontext: RKE2, Cilium (CNI), MetalLB, HAProxy, Istio, OPA Gatekeeper, Ceph — kein IPv6
-
-| Tag | Thema |
-|-----|-------|
-| 21 | VLANs (802.1Q) — Node-Netzwerke im RZ |
-| 22 | Bonding / LACP — HA NICs |
-| 23 | tcpdump tief — Paketanalyse im RZ |
-| 24 | eBPF Grundlagen — Fundament für Cilium |
-| 25 | VXLAN / Overlay-Netzwerke |
-| 26 | Cilium Architektur — wie euer CNI wirklich funktioniert |
-| 27 | MetalLB + HAProxy — L4 Load Balancing im Stack |
-| 28 | Istio Grundlagen — Service Mesh, mTLS, Sidecar |
-| 29 | Kubernetes Netzwerk-Debugging — kubectl, Hubble, tcpdump im Cluster |
-| 30 | Final Exam Modul 3 |
+Modul 3 Themenpool (Stack-Kontext: RKE2, Cilium, MetalLB, HAProxy, Istio, OPA Gatekeeper, Ceph — kein IPv6):
+VLANs, Bonding/LACP, tcpdump, eBPF, VXLAN, Cilium, MetalLB, Istio, Kubernetes Netzwerk-Debugging
 
 ---
 
