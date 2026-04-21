@@ -18,6 +18,7 @@ Gestern hast du Network Namespaces erstellt — aber sie waren komplett isoliert
 ## Kernkonzepte
 
 - [ ] Ein **veth pair** besteht immer aus *zwei* Interfaces — sie sind untrennbar miteinander verbunden: was auf einem Ende reingeht, kommt am anderen Ende raus
+- [ ] Bei `ip link add veth0 type veth peer name veth1` vergibt `peer name veth1` dem **anderen Ende des Kabels** einen Namen — ohne `peer name` wählt der Kernel einen automatischen Namen. Die Namen sind nur Konvention, keine technische Verpflichtung.
 - [ ] Du kannst jedes Ende eines veth pairs in einen anderen Namespace verschieben: `ip link set <veth-end> netns <namespace>`
 - [ ] Erst wenn **beide Enden `UP`** sind und **IP-Adressen** haben, fließt Traffic
 - [ ] Ein veth pair allein reicht für zwei Namespaces — für mehr Namespaces braucht man eine **Linux Bridge** (kommt Tag 16)
