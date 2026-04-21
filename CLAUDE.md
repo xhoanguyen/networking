@@ -98,6 +98,12 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 
 ---
 
+## Übergang Modul 2 → Modul 3
+
+Nach Tag 20 (Final Exam): ehrliche Auswertung — was sitzt, was nicht. Themen die wackeln werden gezielt wiederholt bevor Modul 3 startet. Kein Weitermachen auf wackligem Fundament.
+
+---
+
 ## Modul 3 — Plan (Dateien werden bei Bedarf erstellt)
 
 Stack-Kontext: RKE2, Cilium (CNI), MetalLB, HAProxy, Istio, OPA Gatekeeper, Ceph — kein IPv6
