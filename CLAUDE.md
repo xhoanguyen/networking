@@ -35,7 +35,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 02 — Linux Networking
-**Tag:** 17 — nächstes Thema (TODO)
+**Tag:** 18 — nächstes Thema (TODO)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -84,6 +84,18 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 - Ping zwischen Namespaces läuft auf L2 — kein Routing nötig solange gleicher Subnet
 - `man ip-link` und `man bridge` sind die Primärquellen
 
+### Tag 17 ✅ — iptables / Netfilter
+- Netfilter = Kernel-Framework; `iptables` = Werkzeug zum Konfigurieren
+- 4 Tabellen: `filter` (Firewall), `nat` (Adressübersetzung), `mangle` (Header-Manipulation), `raw` (Conntrack-Bypass)
+- Chains: `INPUT`, `OUTPUT`, `FORWARD`, `PREROUTING`, `POSTROUTING` — Paket durchläuft fest definierte Reihenfolge
+- `filter` ist die Standard-Tabelle — keine `-t` Angabe = `filter`
+- Erste Regel die matched gewinnt — Reihenfolge matters
+- Policy am Ende der Chain: `ACCEPT` (default) oder `DROP` (produktiv)
+- `DROP` = Paket schweigend verwerfen; `REJECT` = Absender bekommt ICMP-Fehler zurück
+- `conntrack` trackt Verbindungszustände: `NEW`, `ESTABLISHED`, `RELATED`, `INVALID`
+- FORWARD Chain ist relevant für Namespace-Traffic der den Host als Router nutzt
+- Debugging: `iptables -L -v -n --line-numbers`, `conntrack -L`, `iptables -t nat -L -v -n`
+
 ---
 
 ## Modul 3 — Plan (Dateien werden bei Bedarf erstellt)
@@ -113,7 +125,11 @@ Stack-Kontext: RKE2, Cilium (CNI), MetalLB, HAProxy, Istio, OPA Gatekeeper, Ceph
 | `modules/02-linux-networking/days/day-14.md` | Tag 14 Übungen |
 | `modules/02-linux-networking/days/day-15.md` | Tag 15 Übungen |
 | `modules/02-linux-networking/days/day-15_SOLUTION.md` | Tag 15 Lösung |
-| `modules/02-linux-networking/days/day-16.md` | Tag 16 Übungen (aktuell) |
+| `modules/02-linux-networking/days/day-16.md` | Tag 16 Übungen |
 | `modules/02-linux-networking/days/day-16_SOLUTION.md` | Tag 16 Lösung |
+| `modules/02-linux-networking/days/day-17.md` | Tag 17 Übungen |
+| `modules/02-linux-networking/days/day-17_SOLUTION.md` | Tag 17 Lösung |
+| `modules/02-linux-networking/days/day-18.md` | Tag 18 Übungen (aktuell) |
+| `modules/02-linux-networking/days/day-18_SOLUTION.md` | Tag 18 Lösung |
 | `modules/02-linux-networking/days/FAQ_day_13.md` | FAQ Tag 13 |
 | `modules/02-linux-networking/cheatsheets/rz_profi_tipps.md` | RZ Profi-Tipps Sammlung |
