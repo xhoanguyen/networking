@@ -36,7 +36,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 02 — Linux Networking
-**Tag:** 19 — nächstes Thema (TODO)
+**Tag:** 20 — Final Exam (TODO)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -84,6 +84,14 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 - Unknown Unicast Flooding: unbekannte MACs werden an alle Ports geflutet
 - Ping zwischen Namespaces läuft auf L2 — kein Routing nötig solange gleicher Subnet
 - `man ip-link` und `man bridge` sind die Primärquellen
+
+### Tag 19 ✅ — Container-Netzwerk von Null
+- Bestandsaufnahme zuerst — prüfen was noch steht bevor man baut
+- Vollständige Reihenfolge: Namespace → Bridge → veth pairs → IPs → Default Routes → IP Forwarding → MASQUERADE
+- L2-Konnektivität zwischen Namespaces läuft über Bridge — kein Routing, kein Host-IP-Stack
+- conntrack live beobachtet: `src=10.0.0.2 dst=8.8.8.8` Hinweg, `src=8.8.8.8 dst=192.168.2.2` Rückweg
+- DNAT für Port Forwarding: `PREROUTING` für externen Traffic, zusätzlich `OUTPUT` für lokalen Traffic
+- Das ist exakt der Mechanismus den Kubernetes/CRI-O für jeden Pod verwendet
 
 ### Tag 18 ✅ — NAT
 - IP Forwarding (`net.ipv4.ip_forward`) muss aktiv sein — sonst wirft der Kernel fremde Pakete still weg
