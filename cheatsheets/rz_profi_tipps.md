@@ -134,3 +134,13 @@ ls /var/run/netns/    # Alle benannten Namespaces auf dem Node
 Namespaces isolieren den Netzwerk-Stack — ein privilegierter Prozess kann ausbrechen.
 Echte Isolation = Network Namespace + cgroups + Seccomp + AppArmor/SELinux.
 Cilium NetworkPolicies bauen auf Namespace-Isolation auf und fügen L3/L4/L7-Filterung hinzu.
+
+---
+
+## Tag 18 — NAT
+
+### Packet-Counter als erster Debugging-Schritt
+```bash
+sudo iptables -t nat -L -v -n
+```
+`pkts` und `bytes` zeigen ob eine Regel überhaupt greift. Wenn eine Regel 0 Pakete zählt obwohl Traffic fließen sollte — falsche Chain, falsche Tabelle, oder Reihenfolge stimmt nicht.
