@@ -12,10 +12,12 @@ Preparing for a RZ team transition. From zero to solid networking skills in 100 
 
 ## Daily Routine
 
-| When | What | Duration |
-|------|------|----------|
-| Mon-Fri | Reading assignment + flashcard review | ~25-30 min |
-| Sat/Sun | Hands-on lab + review questions | ~45-60 min |
+| Phase | What | Duration |
+|-------|------|----------|
+| Theorie | Flashcard-Review + Reading | ~25-30 min |
+| Praxis | Lab-Aufgaben (day-XX.md → day-XX_SOLUTION.md) | ~45-60 min |
+
+Reihenfolge ist fix: erst Flashcards, dann Lab.
 
 ## Modules & Progress
 
@@ -24,26 +26,24 @@ Preparing for a RZ team transition. From zero to solid networking skills in 100 
 | # | Module | Days | Status |
 |---|--------|------|--------|
 | 01 | [Grundlagen (OSI, TCP/IP, DNS)](modules/01-grundlagen/) | 1-10 | [x] Done |
-| 02 | [Linux Networking (ip, netns, veth, bridges)](modules/02-linux-networking/) | 11-20 | [ ] |
-| 03 | [Ethernet, IP & Subnetting](modules/03-ethernet-ip-subnetting/) | 21-30 | [ ] |
-| 04 | [Routing & BGP (FRRouting)](modules/04-routing-bgp/) | 31-40 | [ ] |
-| 05 | [TCP/UDP & DNS/CoreDNS](modules/05-tcp-dns/) | 41-50 | [ ] |
-| 06 | [Load Balancing — HAProxy & MetalLB](modules/06-loadbalancing/) | 51-60 | [ ] |
-| 07 | [K8s Networking Basics (CNI, Services, Ingress)](modules/07-k8s-basics/) | 61-70 | [ ] |
-| 08 | [Cilium & eBPF](modules/08-cilium-ebpf/) | 71-80 | [ ] |
-| 09 | [Service Mesh — Istio & OPA Gatekeeper](modules/09-istio-opa/) | 81-90 | [ ] |
-| 10 | [Observability & End-to-End (VictoriaMetrics)](modules/10-observability/) | 91-100 | [ ] |
+| 02 | [Linux Networking (ip, netns, veth, bridges)](modules/02-linux-networking/) | 11-20 | [~] In Progress (19/20) |
+| 03+ | Themen werden nach Tag 20 Final Exam festgelegt | 21-100 | [ ] |
+
+### Themenpool ab Modul 03
+
+> Reihenfolge und Einteilung folgt nach ehrlicher Lückenanalyse aus Tag 20.
+
+VLANs · Bonding/LACP · tcpdump · eBPF · VXLAN · Cilium · MetalLB · Istio · Kubernetes Netzwerk-Debugging
 
 ## Module Structure
 
 ```
 modules/XX-topic/
-├── days/          # Daily files with reading assignments, flashcards, quizzes
-│   ├── day-XX.md
-│   └── ...
-├── flashcards.md  # All flashcards for the module
-└── lab/           # Weekend hands-on exercises
-    └── lab-XX.md
+├── days/
+│   ├── day-XX.md             # Aufgaben & Flashcards
+│   └── day-XX_SOLUTION.md    # Lösung
+├── flashcards.md
+└── cheatsheets/              # z.B. rz_profi_tipps.md
 ```
 
 ## Tools (macOS)
