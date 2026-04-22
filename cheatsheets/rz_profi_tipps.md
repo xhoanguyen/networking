@@ -144,3 +144,18 @@ Cilium NetworkPolicies bauen auf Namespace-Isolation auf und fügen L3/L4/L7-Fil
 sudo iptables -t nat -L -v -n
 ```
 `pkts` und `bytes` zeigen ob eine Regel überhaupt greift. Wenn eine Regel 0 Pakete zählt obwohl Traffic fließen sollte — falsche Chain, falsche Tabelle, oder Reihenfolge stimmt nicht.
+
+### DNAT immer von extern testen
+DNAT in `PREROUTING` greift nicht wenn du vom Host selbst auf die eigene IP curlst — der Kernel erkennt die eigene IP und umgeht PREROUTING. Für lokalen Traffic (vom Host selbst) braucht man zusätzlich eine Regel in der `OUTPUT` Chain:
+
+| Traffic von | Chain |
+|-------------|-------|
+| Extern | `PREROUTING` |
+| Lokal (Host selbst) | `OUTPUT` |
+
+```bash
+# Für externen Traffic
+sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j DNAT --to-destination 10.0.0.2:80
+# Zusätzlich für lokalen Traffic
+sudo iptables -t nat -A OUTPUT -p tcp --dport 8080 -j DNAT --to-destination 10.0.0.2:80
+```

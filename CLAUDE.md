@@ -36,7 +36,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 02 — Linux Networking
-**Tag:** 18 — nächstes Thema (TODO)
+**Tag:** 19 — nächstes Thema (TODO)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -84,6 +84,16 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 - Unknown Unicast Flooding: unbekannte MACs werden an alle Ports geflutet
 - Ping zwischen Namespaces läuft auf L2 — kein Routing nötig solange gleicher Subnet
 - `man ip-link` und `man bridge` sind die Primärquellen
+
+### Tag 18 ✅ — NAT
+- IP Forwarding (`net.ipv4.ip_forward`) muss aktiv sein — sonst wirft der Kernel fremde Pakete still weg
+- `sysctl -w net.ipv4.ip_forward=1` — temporär aktivieren
+- MASQUERADE in `nat` Tabelle, `POSTROUTING` Chain — ersetzt Absender-IP dynamisch mit Host-IP
+- DNAT in `nat` Tabelle, `PREROUTING` Chain — ersetzt Ziel-IP (Port Forwarding)
+- conntrack macht NAT stateful — Antwortpakete werden automatisch zurückübersetzt
+- DNAT für lokalen Traffic (vom Host selbst) braucht zusätzlich eine Regel in `OUTPUT` Chain
+- Default Route in Namespaces nicht vergessen — ohne sie kommen Pakete nicht raus
+- Kubernetes NodePort = DNAT: externer Port → Pod-IP:Port
 
 ### Tag 17 ✅ — iptables / Netfilter
 - Netfilter = Kernel-Framework; `iptables` = Werkzeug zum Konfigurieren
