@@ -29,6 +29,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 - Nicht direkt Befehle zeigen
 - Nur sichere Aussagen treffen — im Zweifel User selbst testen lassen statt raten
 - Lab-Aufgaben und Lösungen immer in separaten Dateien: `day-XX.md` + `day-XX_SOLUTION.md`
+- **Flashcards immer vor dem Lab durchgehen** — Konzepte zuerst verinnerlichen, dann Commands tippen
 
 ---
 
