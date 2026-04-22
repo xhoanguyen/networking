@@ -137,6 +137,21 @@ Cilium NetworkPolicies bauen auf Namespace-Isolation auf und fügen L3/L4/L7-Fil
 
 ---
 
+## Tag 19 — Container-Netzwerk von Null
+
+### Vollständige Reihenfolge: Namespace ins Internet bringen
+```
+1. Namespace erstellen
+2. Bridge erstellen + IP vergeben (10.0.0.1/24)
+3. veth pair erstellen — ein Ende in den Namespace, ein Ende an die Bridge
+4. IPs vergeben + Interfaces hochbringen
+5. Default Route in den Namespace
+6. IP Forwarding aktivieren
+7. MASQUERADE-Regel setzen
+```
+
+---
+
 ## Tag 18 — NAT
 
 ### Packet-Counter als erster Debugging-Schritt
