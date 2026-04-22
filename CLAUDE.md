@@ -85,14 +85,6 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 - Ping zwischen Namespaces läuft auf L2 — kein Routing nötig solange gleicher Subnet
 - `man ip-link` und `man bridge` sind die Primärquellen
 
-### Tag 19 ✅ — Container-Netzwerk von Null
-- Bestandsaufnahme zuerst — prüfen was noch steht bevor man baut
-- Vollständige Reihenfolge: Namespace → Bridge → veth pairs → IPs → Default Routes → IP Forwarding → MASQUERADE
-- L2-Konnektivität zwischen Namespaces läuft über Bridge — kein Routing, kein Host-IP-Stack
-- conntrack live beobachtet: `src=10.0.0.2 dst=8.8.8.8` Hinweg, `src=8.8.8.8 dst=192.168.2.2` Rückweg
-- DNAT für Port Forwarding: `PREROUTING` für externen Traffic, zusätzlich `OUTPUT` für lokalen Traffic
-- Das ist exakt der Mechanismus den Kubernetes/CRI-O für jeden Pod verwendet
-
 ### Tag 18 ✅ — NAT
 - IP Forwarding (`net.ipv4.ip_forward`) muss aktiv sein — sonst wirft der Kernel fremde Pakete still weg
 - `sysctl -w net.ipv4.ip_forward=1` — temporär aktivieren
@@ -114,6 +106,14 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 - `conntrack` trackt Verbindungszustände: `NEW`, `ESTABLISHED`, `RELATED`, `INVALID`
 - FORWARD Chain ist relevant für Namespace-Traffic der den Host als Router nutzt
 - Debugging: `iptables -L -v -n --line-numbers`, `conntrack -L`, `iptables -t nat -L -v -n`
+
+### Tag 19 ✅ — Container-Netzwerk von Null
+- Bestandsaufnahme zuerst — prüfen was noch steht bevor man baut
+- Vollständige Reihenfolge: Namespace → Bridge → veth pairs → IPs → Default Routes → IP Forwarding → MASQUERADE
+- L2-Konnektivität zwischen Namespaces läuft über Bridge — kein Routing, kein Host-IP-Stack
+- conntrack live beobachtet: `src=10.0.0.2 dst=8.8.8.8` Hinweg, `src=8.8.8.8 dst=192.168.2.2` Rückweg
+- DNAT für Port Forwarding: `PREROUTING` für externen Traffic, zusätzlich `OUTPUT` für lokalen Traffic
+- Das ist exakt der Mechanismus den Kubernetes/CRI-O für jeden Pod verwendet
 
 ---
 
@@ -141,7 +141,11 @@ VLANs, Bonding/LACP, tcpdump, eBPF, VXLAN, Cilium, MetalLB, Istio, Kubernetes Ne
 | `modules/02-linux-networking/days/day-16_SOLUTION.md` | Tag 16 Lösung |
 | `modules/02-linux-networking/days/day-17.md` | Tag 17 Übungen |
 | `modules/02-linux-networking/days/day-17_SOLUTION.md` | Tag 17 Lösung |
-| `modules/02-linux-networking/days/day-18.md` | Tag 18 Übungen (aktuell) |
+| `modules/02-linux-networking/days/day-18.md` | Tag 18 Übungen |
 | `modules/02-linux-networking/days/day-18_SOLUTION.md` | Tag 18 Lösung |
+| `modules/02-linux-networking/days/day-19.md` | Tag 19 Übungen |
+| `modules/02-linux-networking/days/day-19_SOLUTION.md` | Tag 19 Lösung |
+| `modules/02-linux-networking/days/day-20.md` | Tag 20 Final Exam |
+| `modules/02-linux-networking/days/day-20_SOLUTION.md` | Tag 20 Lösung |
 | `modules/02-linux-networking/days/FAQ_day_13.md` | FAQ Tag 13 |
 | `modules/02-linux-networking/cheatsheets/rz_profi_tipps.md` | RZ Profi-Tipps Sammlung |
