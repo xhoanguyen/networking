@@ -18,6 +18,7 @@ Nach jeder Aufgabe oder Erklärung: einen konkreten Profi-Tipp geben, der die Ar
 Kurz und einfach:
 - Erste Zeile: kurze Zusammenfassung (was wurde gemacht)
 - Kein Co-Authored-By, keine langen Beschreibungen
+- Vom User bestätigen lassen
 
 ## Networking-Fachsprache
 
