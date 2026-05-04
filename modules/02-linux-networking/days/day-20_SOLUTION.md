@@ -13,6 +13,26 @@ veth pair = virtuelles Kabel, verbindet genau zwei Endpunkte. Bridge = virtuelle
 **3. MAC-Learning:**
 Die Bridge merkt sich welche MAC-Adresse hinter welchem Port liegt (Forwarding Database). Ohne MAC-Learning müsste sie jeden Frame an alle Ports fluten (Unknown Unicast Flooding). Mit gelernten MACs leitet sie gezielt weiter — weniger Traffic, bessere Performance.
 
+Ohne MAC-Learning (reines Flooding):
+```
+ns-web schickt Frame an ns-db
+→ Bridge kennt keine MACs
+→ schickt Frame an ALLE Ports (ns-web, ns-db, ns-cache)
+→ ns-db und ns-cache empfangen beide den Frame
+→ ns-cache schmeißt ihn weg (falsche Ziel-MAC)
+```
+
+Mit MAC-Learning:
+```
+ns-web schickt Frame an ns-db
+→ Bridge sieht Absender-MAC X auf Port veth-web-br → speichert in FDB
+→ Ziel-MAC von ns-db noch unbekannt → einmal fluten
+→ ns-db antwortet → Bridge lernt MAC Y auf Port veth-db-br → speichert in FDB
+→ Nächster Frame ns-web → ns-db: direkt an veth-db-br, kein Flooding mehr
+```
+
+Hinweis: Die Bridge lernt MACs aus dem Ethernet-Header jedes eingehenden Frames — nicht aus dem ARP-Payload.
+
 **4. docker0 mit IP:**
 Ein Linux-Interface kann gleichzeitig auf L2 (Bridge) und L3 (IP) operieren. Die IP auf `docker0` macht den Host zum Gateway für Container — Container können darüber den Host erreichen und über ihn ins Internet routen.
 
