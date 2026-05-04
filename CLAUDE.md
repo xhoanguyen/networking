@@ -37,7 +37,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 03 — Linux Networking Advanced
-**Tag:** 21 — Review: Netzwerk-Debugging Systematisch
+**Tag:** 21 🔄 — Review: Netzwerk-Debugging Systematisch (in progress)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -130,7 +130,7 @@ Themenpool (Stack-Kontext: RKE2, Cilium, MetalLB, HAProxy, Istio, OPA Gatekeeper
 VLANs, Bonding/LACP, tcpdump, eBPF, VXLAN, Cilium, MetalLB, Istio, Kubernetes Netzwerk-Debugging
 
 Geplante Tage:
-- Tag 21 — Review: Netzwerk-Debugging Systematisch
+- Tag 21 🔄 — Review: Netzwerk-Debugging Systematisch (in progress)
 - Tag 22 — Review: Bridge Deep Dive
 - Tag 23 — tcpdump
 - Tag 24 — conntrack & iptables Vertiefung
@@ -163,3 +163,4 @@ Geplante Tage:
 | `modules/02-linux-networking/days/day-20_SOLUTION.md` | Tag 20 Lösung |
 | `modules/02-linux-networking/days/FAQ_day_13.md` | FAQ Tag 13 |
 | `modules/02-linux-networking/cheatsheets/rz_profi_tipps.md` | RZ Profi-Tipps Sammlung |
+| `modules/03-linux-networking-advanced/days/day-21_setup.sh` | Tag 21 Broken Setup Script |
