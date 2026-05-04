@@ -116,17 +116,30 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 - DNAT für Port Forwarding: `PREROUTING` für externen Traffic, zusätzlich `OUTPUT` für lokalen Traffic
 - Das ist exakt der Mechanismus den Kubernetes/CRI-O für jeden Pod verwendet
 
+### Tag 20 ✅ — Final Exam: Linux Networking
+- 14/18 Theoriefragen richtig — Kernkonzepte sitzen
+- Lücken: conntrack vs. iptables-Counter (Fragen 9/10), NO-CARRIER Ursache (13), /32 Subnetz-Verhalten (14)
+- Lab komplett aufgebaut und aufgeräumt (ns-web, ns-db, ns-cache + Bridge + NAT)
+- Vertiefungsthemen für Modul 03: conntrack (Tag 24), STP + Subnetz-Masken (Tag 25), Subnetz-Theorie (Tag 26)
+
 ---
 
-## Übergang Modul 2 → Modul 3
+## Modul 03 — Linux Networking Advanced
 
-Nach Tag 20 (Final Exam):
-1. Ehrliche Auswertung — was sitzt, was nicht
-2. Lücken identifizieren und gezielt wiederholen
-3. Erst dann gemeinsam Plan für Tage 21–30 erstellen — basierend auf dem echten Stand, nicht auf einem fixen Plan
-
-Modul 3 Themenpool (Stack-Kontext: RKE2, Cilium, MetalLB, HAProxy, Istio, OPA Gatekeeper, Ceph — kein IPv6):
+Themenpool (Stack-Kontext: RKE2, Cilium, MetalLB, HAProxy, Istio, OPA Gatekeeper, Ceph — kein IPv6):
 VLANs, Bonding/LACP, tcpdump, eBPF, VXLAN, Cilium, MetalLB, Istio, Kubernetes Netzwerk-Debugging
+
+Geplante Tage:
+- Tag 21 — Review: Netzwerk-Debugging Systematisch
+- Tag 22 — Review: Bridge Deep Dive
+- Tag 23 — tcpdump
+- Tag 24 — conntrack & iptables Vertiefung
+- Tag 25 — STP + Subnetz-Masken
+- Tag 26 — Subnetz-Theorie
+- Tag 27 — VLANs
+- Tag 28 ✅ — eBPF Fundamentals (Architecture, Maps, Programs)
+- Tag 29 — eBPF Networking (XDP, tc hooks, Cilium)
+- Tag 30 — eBPF Praxis (BCC Tools, bpftool, live Traffic)
 
 ---
 
