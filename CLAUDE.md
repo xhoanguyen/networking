@@ -36,8 +36,8 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 
 ## Aktueller Fortschritt
 
-**Modul:** 02 — Linux Networking
-**Tag:** 20 — Final Exam (TODO)
+**Modul:** 03 — Linux Networking Advanced
+**Tag:** 23 — tcpdump
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
