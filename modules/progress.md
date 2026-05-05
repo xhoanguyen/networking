@@ -1,0 +1,88 @@
+# Abgeschlossene Tage
+
+### Tag 11 ✅ — Erste Schritte mit Multipass
+- Multipass installiert, VM `rz-node` aufgesetzt (2 CPU, 2G RAM, 10G Disk)
+- Erste `ip`-Commands: `ip link`, `ip addr`, `ip route`, `ip neigh`, `ss -tuln`
+- Interface heißt `enp0s1` (nicht `eth0`)
+- Unterschied `lo` vs. physisches Interface verstanden
+- `ping` und `traceroute` als erste Connectivity-Tests
+
+### Tag 12 ✅ — Linux Routing & ARP vertiefen
+- Linux hat drei Routing-Tabellen: `local`, `main`, `default`
+- `ip route show` zeigt nur `main` — `ip route show table all` zeigt alles
+- Longest Prefix Match: `/32` schlägt `/24` schlägt `/0`
+- ARP-Zustandsmaschine: `REACHABLE` → `STALE` → `DELAY` → `PROBE` → `FAILED`
+- Gratuitous ARP: proaktive Cache-Aktualisierung bei Failover (relevant für MetalLB L2-Mode)
+- MTU-Debugging: `ping -M do -s 1472` — kleiner Ping geht, große Transfers hängen = MTU-Problem
+
+### Tag 13 ✅ — Der `ip`-Befehl: Komplett-Training
+- **Block A** — `ip link`: Interfaces lesen, Statistiken (-s -h), MAC, promisc, up/down
+- **Block B** — `ip addr`: IPs anzeigen, hinzufügen/entfernen, JSON + jq, `ip addr get`
+- **Block C** — `ip route`: Default Route, `ip route get`, statische Route, local-Tabelle, Policy-Routing
+- **Block D** — ARP / Neighbor-Cache (`ip neigh`)
+
+### Tag 14 ✅ — Network Namespaces (`ip netns`)
+- Isolation durch fehlende Konnektivität (nicht Firewall)
+- `ip netns add/exec/delete`, `nsenter -t <pid> -n`
+- Kernel injiziert Routen automatisch bei `ip link set lo up`
+
+### Tag 15 ✅ — veth pairs
+- veth pair erstellen, Enden in Namespaces verschieben
+- IPs vergeben, Interfaces hochbringen, Ping zwischen Namespaces
+- Connected Route wird automatisch vom Kernel angelegt
+- NO-CARRIER wenn Gegenstück DOWN ist
+
+### Tag 16 ✅ — Linux Bridge
+- Bridge = virtueller L2-Switch im Kernel (`ip link add name br0 type bridge`)
+- Bridge-Enden der veth pairs via `master`-Keyword als Ports enslaven
+- `bridge link show` zeigt Ports und deren State (`forwarding`, `disabled`)
+- `bridge fdb show` zeigt die MAC-Adress-Tabelle (Forwarding Database)
+- Bridge lernt MACs dynamisch — dynamische Einträge verschwinden nach Timeout (~300s)
+- Unknown Unicast Flooding: unbekannte MACs werden an alle Ports geflutet
+- Ping zwischen Namespaces läuft auf L2 — kein Routing nötig solange gleicher Subnet
+- `man ip-link` und `man bridge` sind die Primärquellen
+
+### Tag 17 ✅ — iptables / Netfilter
+- Netfilter = Kernel-Framework; `iptables` = Werkzeug zum Konfigurieren
+- 4 Tabellen: `filter` (Firewall), `nat` (Adressübersetzung), `mangle` (Header-Manipulation), `raw` (Conntrack-Bypass)
+- Chains: `INPUT`, `OUTPUT`, `FORWARD`, `PREROUTING`, `POSTROUTING` — Paket durchläuft fest definierte Reihenfolge
+- `filter` ist die Standard-Tabelle — keine `-t` Angabe = `filter`
+- Erste Regel die matched gewinnt — Reihenfolge matters
+- Policy am Ende der Chain: `ACCEPT` (default) oder `DROP` (produktiv)
+- `DROP` = Paket schweigend verwerfen; `REJECT` = Absender bekommt ICMP-Fehler zurück
+- `conntrack` trackt Verbindungszustände: `NEW`, `ESTABLISHED`, `RELATED`, `INVALID`
+- FORWARD Chain ist relevant für Namespace-Traffic der den Host als Router nutzt
+- Debugging: `iptables -L -v -n --line-numbers`, `conntrack -L`, `iptables -t nat -L -v -n`
+
+### Tag 18 ✅ — NAT
+- IP Forwarding (`net.ipv4.ip_forward`) muss aktiv sein — sonst wirft der Kernel fremde Pakete still weg
+- `sysctl -w net.ipv4.ip_forward=1` — temporär aktivieren
+- MASQUERADE in `nat` Tabelle, `POSTROUTING` Chain — ersetzt Absender-IP dynamisch mit Host-IP
+- DNAT in `nat` Tabelle, `PREROUTING` Chain — ersetzt Ziel-IP (Port Forwarding)
+- conntrack macht NAT stateful — Antwortpakete werden automatisch zurückübersetzt
+- DNAT für lokalen Traffic (vom Host selbst) braucht zusätzlich eine Regel in `OUTPUT` Chain
+- Default Route in Namespaces nicht vergessen — ohne sie kommen Pakete nicht raus
+- Kubernetes NodePort = DNAT: externer Port → Pod-IP:Port
+
+### Tag 19 ✅ — Container-Netzwerk von Null
+- Bestandsaufnahme zuerst — prüfen was noch steht bevor man baut
+- Vollständige Reihenfolge: Namespace → Bridge → veth pairs → IPs → Default Routes → IP Forwarding → MASQUERADE
+- L2-Konnektivität zwischen Namespaces läuft über Bridge — kein Routing, kein Host-IP-Stack
+- conntrack live beobachtet: `src=10.0.0.2 dst=8.8.8.8` Hinweg, `src=8.8.8.8 dst=192.168.2.2` Rückweg
+- DNAT für Port Forwarding: `PREROUTING` für externen Traffic, zusätzlich `OUTPUT` für lokalen Traffic
+- Das ist exakt der Mechanismus den Kubernetes/CRI-O für jeden Pod verwendet
+
+### Tag 20 ✅ — Final Exam: Linux Networking
+- 14/18 Theoriefragen richtig — Kernkonzepte sitzen
+- Lücken: conntrack vs. iptables-Counter (Fragen 9/10), NO-CARRIER Ursache (13), /32 Subnetz-Verhalten (14)
+- Lab komplett aufgebaut und aufgeräumt (ns-web, ns-db, ns-cache + Bridge + NAT)
+- Vertiefungsthemen für Modul 03: conntrack (Tag 24), STP + Subnetz-Masken (Tag 25), Subnetz-Theorie (Tag 26)
+
+### Tag 21 ✅ — Review: Netzwerk-Debugging Systematisch
+- OSI Bottom-Up Debugging: `ip link` → `ip addr` → `ip route` → Host-Konfiguration
+- `LOWERLAYERDOWN` = Peer des veth-Paares ist DOWN
+- `NO-CARRIER` auf Bridge = keine aktiven Ports angehängt
+- `link-netns` zeigt wo der **Peer** steckt, nicht das Interface selbst
+- Connected Route erscheint automatisch wenn Interface UP ist und eine IP hat — nicht durch Traffic
+- Drei Fehler im Broken Lab gefunden und gefixt: veth-web DOWN, veth-cache-br nicht an br0, ip_forward=0
+- Im RZ: immer Schicht für Schicht debuggen — nie raten, immer messen
