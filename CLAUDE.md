@@ -37,7 +37,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 03 — Linux Networking Advanced
-**Tag:** 21 🔄 — Review: Netzwerk-Debugging Systematisch (in progress)
+**Tag:** 22 — Review: Bridge Deep Dive (next)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -122,6 +122,15 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 - Lab komplett aufgebaut und aufgeräumt (ns-web, ns-db, ns-cache + Bridge + NAT)
 - Vertiefungsthemen für Modul 03: conntrack (Tag 24), STP + Subnetz-Masken (Tag 25), Subnetz-Theorie (Tag 26)
 
+### Tag 21 ✅ — Review: Netzwerk-Debugging Systematisch
+- OSI Bottom-Up Debugging: `ip link` → `ip addr` → `ip route` → Host-Konfiguration
+- `LOWERLAYERDOWN` = Peer des veth-Paares ist DOWN
+- `NO-CARRIER` auf Bridge = keine aktiven Ports angehängt
+- `link-netns` zeigt wo der **Peer** steckt, nicht das Interface selbst
+- Connected Route erscheint automatisch wenn Interface UP ist und eine IP hat — nicht durch Traffic
+- Drei Fehler im Broken Lab gefunden und gefixt: veth-web DOWN, veth-cache-br nicht an br0, ip_forward=0
+- Im RZ: immer Schicht für Schicht debuggen — nie raten, immer messen
+
 ---
 
 ## Modul 03 — Linux Networking Advanced
@@ -130,7 +139,7 @@ Themenpool (Stack-Kontext: RKE2, Cilium, MetalLB, HAProxy, Istio, OPA Gatekeeper
 VLANs, Bonding/LACP, tcpdump, eBPF, VXLAN, Cilium, MetalLB, Istio, Kubernetes Netzwerk-Debugging
 
 Geplante Tage:
-- Tag 21 🔄 — Review: Netzwerk-Debugging Systematisch (in progress)
+- Tag 21 ✅ — Review: Netzwerk-Debugging Systematisch
 - Tag 22 — Review: Bridge Deep Dive
 - Tag 23 — tcpdump
 - Tag 24 — conntrack & iptables Vertiefung
