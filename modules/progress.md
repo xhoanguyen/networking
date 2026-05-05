@@ -56,7 +56,7 @@
 
 ### Tag 18 ✅ — NAT
 - IP Forwarding (`net.ipv4.ip_forward`) muss aktiv sein — sonst wirft der Kernel fremde Pakete still weg
-- `sysctl -w net.ipv4.ip_forward=1` — temporär aktivieren
+- `sysctl -w net.ipv4.ip_forward=1` — temporär aktivieren, sehr wahrscheinlich mit `sudo`
 - MASQUERADE in `nat` Tabelle, `POSTROUTING` Chain — ersetzt Absender-IP dynamisch mit Host-IP
 - DNAT in `nat` Tabelle, `PREROUTING` Chain — ersetzt Ziel-IP (Port Forwarding)
 - conntrack macht NAT stateful — Antwortpakete werden automatisch zurückübersetzt
