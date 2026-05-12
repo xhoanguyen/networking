@@ -37,7 +37,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 03 — Linux Networking Advanced
-**Tag:** 22 — Review: Bridge Deep Dive (next)
+**Tag:** 29 — eBPF Networking (nächstes)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -88,4 +88,6 @@ Geplante Tage:
 | `modules/02-linux-networking/days/FAQ_day_13.md` | FAQ Tag 13 |
 | `modules/02-linux-networking/cheatsheets/rz_profi_tipps.md` | RZ Profi-Tipps Sammlung |
 | `modules/03-linux-networking-advanced/days/day-21_setup.sh` | Tag 21 Broken Setup Script |
+| `modules/03-linux-networking-advanced/days/day-28.md` | Tag 28 Übungen |
+| `modules/03-linux-networking-advanced/days/day-28_SOLUTION.md` | Tag 28 Lösung |
 | `modules/progress.md` | Alle abgeschlossenen Tage mit Learnings |
