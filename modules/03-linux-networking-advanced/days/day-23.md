@@ -7,6 +7,26 @@ gezielt Traffic mitschneiden, filtern und auswerten — und weißt wann du welch
 
 ---
 
+## Netzwerk-Topologie
+
+```
+                    ┌─────────────────────────────────────────┐
+                    │           br0 (10.9.0.1/24)             │
+                    │                Bridge                    │
+                    └──────┬──────────────┬──────────────┬────┘
+                           │              │              │
+                      veth-a-br       veth-b-br      veth-c-br
+                           │              │              │
+                      veth-a           veth-b         veth-c
+                           │              │              │
+                ┌──────────┴──┐  ┌────────┴────┐  ┌─────┴───────┐
+                │    ns-a     │  │    ns-b     │  │    ns-c     │
+                │ 10.9.0.10   │  │ 10.9.0.20   │  │ 10.9.0.30   │
+                └─────────────┘  └─────────────┘  └─────────────┘
+```
+
+---
+
 ## Flashcards — erst durchgehen, dann Lab
 
 **1. Auf welcher OSI-Schicht arbeitet tcpdump?**
