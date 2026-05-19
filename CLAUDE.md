@@ -37,7 +37,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 03 — Linux Networking Advanced
-**Tag:** 29 — eBPF Networking (nächstes)
+**Tag:** 24 — conntrack & iptables Vertiefung (nächstes)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -56,7 +56,7 @@ VLANs, Bonding/LACP, tcpdump, eBPF, VXLAN, Cilium, MetalLB, Istio, Kubernetes Ne
 Geplante Tage:
 - Tag 21 ✅ — Review: Netzwerk-Debugging Systematisch
 - Tag 22 — Review: Bridge Deep Dive
-- Tag 23 — tcpdump
+- Tag 23 ✅ — tcpdump
 - Tag 24 — conntrack & iptables Vertiefung
 - Tag 25 — STP + Subnetz-Masken
 - Tag 26 — Subnetz-Theorie
@@ -89,5 +89,7 @@ Geplante Tage:
 | `modules/02-linux-networking/cheatsheets/rz_profi_tipps.md` | RZ Profi-Tipps Sammlung |
 | `modules/03-linux-networking-advanced/days/day-21_setup.sh` | Tag 21 Broken Setup Script |
 | `modules/03-linux-networking-advanced/days/day-28.md` | Tag 28 Übungen |
+| `modules/03-linux-networking-advanced/days/day-23.md` | Tag 23 Übungen |
+| `modules/03-linux-networking-advanced/days/day-23_SOLUTION.md` | Tag 23 Lösung |
 | `modules/03-linux-networking-advanced/days/day-28_SOLUTION.md` | Tag 28 Lösung |
 | `modules/progress.md` | Alle abgeschlossenen Tage mit Learnings |

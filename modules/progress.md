@@ -78,6 +78,18 @@
 - Lab komplett aufgebaut und aufgeräumt (ns-web, ns-db, ns-cache + Bridge + NAT)
 - Vertiefungsthemen für Modul 03: conntrack (Tag 24), STP + Subnetz-Masken (Tag 25), Subnetz-Theorie (Tag 26)
 
+### Tag 23 ✅ — tcpdump (Paket-Analyse im RZ)
+- tcpdump arbeitet auf L2 — sieht rohe Ethernet-Frames, setzt Interface in promiscuous mode
+- BPF (Berkeley Packet Filter) ist das Filter-System — läuft direkt im Kernel, Vorgänger von eBPF
+- `-nn` verhindert DNS-Lookups während des Captures — kein eigener Traffic, kein Rauschen
+- `-i br0` vs. `-i any` — gezielt vs. breiter Überblick; im RZ erst `any`, dann gezielt
+- BPF-Filter: `host X and host Y`, `port 80`, `arp`, `icmp`, `not port 22`
+- `-w /tmp/capture_$(date +%Y%m%d_%H%M).pcap` — einmal capturen, beliebig oft auslesen
+- `packets dropped by kernel` in der Zusammenfassung = Buffer überlastet, Filter zu weit
+- `-A` zeigt Payload als ASCII — HTTP-Traffic ist im Klartext lesbar (Sicherheitsproblem)
+- `-e` zeigt Ethernet-Header mit MAC-Adressen — direkte Verbindung zur Bridge-FDB
+- Istio mTLS schützt internen Kubernetes-Traffic vor genau diesem Angriff
+
 ### Tag 21 ✅ — Review: Netzwerk-Debugging Systematisch
 - OSI Bottom-Up Debugging: `ip link` → `ip addr` → `ip route` → Host-Konfiguration
 - `LOWERLAYERDOWN` = Peer des veth-Paares ist DOWN
