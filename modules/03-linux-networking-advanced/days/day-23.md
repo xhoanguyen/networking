@@ -287,6 +287,24 @@ sudo ip link delete br0
 
 ---
 
+## Was wir in Tag 23 gemacht haben
+
+**Konzepte:**
+- tcpdump arbeitet auf **L2** — sieht rohe Ethernet-Frames, setzt Interface in promiscuous mode
+- **BPF** (Berkeley Packet Filter) ist das Filter-System — läuft im Kernel, Vorgänger von eBPF
+- `-nn` verhindert DNS-Lookups während des Captures — kein eigener Noise
+- `packets dropped by kernel` = Buffer überlastet, Filter zu weit gesetzt
+
+**Lab-Aufgaben:**
+1. Erster Capture — ICMP vs. ARP beobachtet, ARP-Cache-Verhalten verstanden
+2. BPF-Filter nach Host — Traffic der nicht matched verschwindet komplett im Kernel
+3. Nur ARP — bidirektionalen Handshake live gesehen (4 Pakete für einen Ping)
+4. Capture in `.pcap` Datei schreiben und mit Filter auslesen
+5. HTTP-Traffic im Klartext mit `-A` gelesen — Sicherheits-Implikation verstanden
+6. MAC-Adressen mit `-e` sichtbar gemacht und mit Bridge-FDB verglichen
+
+---
+
 ## RZ Profi-Tipp
 
 Im RZ startest du tcpdump fast nie ohne `-w`. Grund: der Terminal-Output läuft weg und ist nicht reproduzierbar. Mit `-w` hast du den vollständigen Beweis für ein Ticket oder Postmortem. Workflow im RZ:
