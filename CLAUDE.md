@@ -76,21 +76,26 @@ Geplante Tage:
 - Tag 33 — Ch4: IPAM Part 2 (ENI, multi-pool, dual-stack)
 - Tag 34 — Ch5: Routing (Native Routing, GENEVE, Node-Routes)
 - Tag 35 — Ch6: kube-proxy Replacement Part 1
-- Tag 36 — Ch6: kube-proxy Replacement Part 2 + Lab
-- Tag 37 — Ch7: Ingress & Gateway API
-- Tag 38 — Ch8: Load Balancing (DSR, Maglev, LRP)
-- Tag 39 — Ch9: Cluster Mesh Part 1
-- Tag 40 — Ch9: Cluster Mesh Part 2
-- Tag 41 — Ch10: L2/L3 Announcements
-- Tag 42 — Ch11: Egress Gateway & Bandwidth Manager
-- Tag 43 — Ch12: Network Policies Part 1
-- Tag 44 — Ch12: Network Policies Part 2 (Default Deny, Cluster-wide)
-- Tag 45 — Ch13: DNS & FQDN Policies
-- Tag 46 — Ch14: Encryption (WireGuard/IPSec)
-- Tag 47 — Ch15: Hubble Observability Part 1
-- Tag 48 — Ch15: Hubble Part 2 + Ch16: Metrics (Prometheus & Grafana)
-- Tag 49 — Gesamtreview (alle Cilium-Themen)
-- Tag 50 — Mock Exam: CCA Prüfungssimulation
+- Tag 36 — Ch6: kube-proxy Replacement Part 2
+- Tag 37 — Ch6: kube-proxy Replacement Part 3 + Lab
+- Tag 38 — Ch7: Ingress & Gateway API
+- Tag 39 — Ch8: Load Balancing (DSR, Maglev, LRP)
+- Tag 40 — Ch9: Cluster Mesh Part 1
+- Tag 41 — Ch9: Cluster Mesh Part 2
+- Tag 42 — Ch9: Cluster Mesh Part 3 + Lab
+- Tag 43 — Ch10: L2/L3 Announcements
+- Tag 44 — Ch11: Egress Gateway & Bandwidth Manager
+- Tag 45 — Ch12: Network Policies Part 1
+- Tag 46 — Ch12: Network Policies Part 2
+- Tag 47 — Ch12: Network Policies Part 3 + Troubleshooting
+- Tag 48 — Ch13: DNS & FQDN Policies
+- Tag 49 — Ch14: Encryption (WireGuard/IPSec)
+- Tag 50 — Ch15: Hubble Observability Part 1
+- Tag 51 — Ch15: Hubble Observability Part 2
+- Tag 52 — Ch16: Metrics (Prometheus & Grafana)
+- Tag 53 — Gesamtreview Part 1 (Ch3–Ch9)
+- Tag 54 — Gesamtreview Part 2 (Ch10–Ch16)
+- Tag 55 — Mock Exam: CCA Prüfungssimulation
 
 ---
 
