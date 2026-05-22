@@ -65,6 +65,33 @@ Geplante Tage:
 - Tag 29 — eBPF Networking (XDP, tc hooks, Cilium)
 - Tag 30 — eBPF Praxis (BCC Tools, bpftool, live Traffic)
 
+## Modul 04 — Cilium: Up and Running (CCA Vorbereitung)
+
+Buch: *Cilium: Up and Running* von Nico Vibert, Filip Nikolic, James Laverack
+Repo: `/Users/xhoa/workspace/cilium-up-and-running/`
+
+Geplante Tage:
+- Tag 31 — Ch3: Cilium Basics (Installation, kind, erste Network Policy)
+- Tag 32 — Ch4: IPAM Part 1 (kubernetes/cluster-scope Modi)
+- Tag 33 — Ch4: IPAM Part 2 (ENI, multi-pool, dual-stack)
+- Tag 34 — Ch5: Routing (Native Routing, GENEVE, Node-Routes)
+- Tag 35 — Ch6: kube-proxy Replacement Part 1
+- Tag 36 — Ch6: kube-proxy Replacement Part 2 + Lab
+- Tag 37 — Ch7: Ingress & Gateway API
+- Tag 38 — Ch8: Load Balancing (DSR, Maglev, LRP)
+- Tag 39 — Ch9: Cluster Mesh Part 1
+- Tag 40 — Ch9: Cluster Mesh Part 2
+- Tag 41 — Ch10: L2/L3 Announcements
+- Tag 42 — Ch11: Egress Gateway & Bandwidth Manager
+- Tag 43 — Ch12: Network Policies Part 1
+- Tag 44 — Ch12: Network Policies Part 2 (Default Deny, Cluster-wide)
+- Tag 45 — Ch13: DNS & FQDN Policies
+- Tag 46 — Ch14: Encryption (WireGuard/IPSec)
+- Tag 47 — Ch15: Hubble Observability Part 1
+- Tag 48 — Ch15: Hubble Part 2 + Ch16: Metrics (Prometheus & Grafana)
+- Tag 49 — Gesamtreview (alle Cilium-Themen)
+- Tag 50 — Mock Exam: CCA Prüfungssimulation
+
 ---
 
 ## Dateien
