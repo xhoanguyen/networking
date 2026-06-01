@@ -90,6 +90,10 @@
 - `-e` zeigt Ethernet-Header mit MAC-Adressen — direkte Verbindung zur Bridge-FDB
 - Istio mTLS schützt internen Kubernetes-Traffic vor genau diesem Angriff
 
+---
+
+> **Modul 03 pausiert** — offene Tage (22, 24–27, 29–30) als optional markiert. Weiter mit Modul 04 (Cilium CCA).
+
 ### Tag 21 ✅ — Review: Netzwerk-Debugging Systematisch
 - OSI Bottom-Up Debugging: `ip link` → `ip addr` → `ip route` → Host-Konfiguration
 - `LOWERLAYERDOWN` = Peer des veth-Paares ist DOWN

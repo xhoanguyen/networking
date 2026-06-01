@@ -36,8 +36,8 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 
 ## Aktueller Fortschritt
 
-**Modul:** 03 — Linux Networking Advanced
-**Tag:** 24 — conntrack & iptables Vertiefung (nächstes)
+**Modul:** 04 — Cilium: Up and Running (CCA Vorbereitung)
+**Tag:** 31 — Ch3: Cilium Basics (nächstes)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -55,15 +55,15 @@ VLANs, Bonding/LACP, tcpdump, eBPF, VXLAN, Cilium, MetalLB, Istio, Kubernetes Ne
 
 Geplante Tage:
 - Tag 21 ✅ — Review: Netzwerk-Debugging Systematisch
-- Tag 22 — Review: Bridge Deep Dive
+- Tag 22 — Review: Bridge Deep Dive *(offen, optional)*
 - Tag 23 ✅ — tcpdump
-- Tag 24 — conntrack & iptables Vertiefung
-- Tag 25 — STP + Subnetz-Masken
-- Tag 26 — Subnetz-Theorie
-- Tag 27 — VLANs
+- Tag 24 — conntrack & iptables Vertiefung *(optional)*
+- Tag 25 — STP + Subnetz-Masken *(optional)*
+- Tag 26 — Subnetz-Theorie *(optional)*
+- Tag 27 — VLANs *(optional)*
 - Tag 28 ✅ — eBPF Fundamentals (Architecture, Maps, Programs)
-- Tag 29 — eBPF Networking (XDP, tc hooks, Cilium)
-- Tag 30 — eBPF Praxis (BCC Tools, bpftool, live Traffic)
+- Tag 29 — eBPF Networking (XDP, tc hooks, Cilium) *(optional)*
+- Tag 30 — eBPF Praxis (BCC Tools, bpftool, live Traffic) *(optional)*
 
 ## Modul 04 — Cilium: Up and Running (CCA Vorbereitung)
 
