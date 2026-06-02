@@ -124,6 +124,7 @@ Geplante Tage:
 | `modules/03-linux-networking-advanced/days/day-23.md` | Tag 23 Übungen |
 | `modules/03-linux-networking-advanced/days/day-23_SOLUTION.md` | Tag 23 Lösung |
 | `modules/03-linux-networking-advanced/days/day-28_SOLUTION.md` | Tag 28 Lösung |
+| `modules/04-cilium/CCA-exam.md` | CCA Exam Notizen (wird täglich ergänzt) |
 | `modules/04-cilium/days/day-31.md` | Tag 31 Übungen |
 | `modules/04-cilium/days/day-31_SOLUTION.md` | Tag 31 Lösung |
 | `modules/progress.md` | Alle abgeschlossenen Tage mit Learnings |
