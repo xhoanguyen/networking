@@ -37,7 +37,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 04 — Cilium: Up and Running (CCA Vorbereitung)
-**Tag:** 32 — Ch4: IPAM Part 1 (nächstes)
+**Tag:** 33 — Ch4: IPAM Part 2 (nächstes)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -72,7 +72,7 @@ Repo: `/Users/xhoa/workspace/cilium-up-and-running/`
 
 Geplante Tage:
 - Tag 31 ✅ — Ch3: Cilium Basics (Installation, kind, erste Network Policy)
-- Tag 32 — Ch4: IPAM Part 1 (kubernetes/cluster-scope Modi)
+- Tag 32 ✅ — Ch4: IPAM Part 1 (kubernetes/cluster-scope Modi)
 - Tag 33 — Ch4: IPAM Part 2 (ENI, multi-pool, dual-stack)
 - Tag 34 — Ch5: Routing (Native Routing, GENEVE, Node-Routes)
 - Tag 35 — Ch6: kube-proxy Replacement Part 1
@@ -127,4 +127,6 @@ Geplante Tage:
 | `modules/04-cilium/CCA-exam.md` | CCA Exam Notizen (wird täglich ergänzt) |
 | `modules/04-cilium/days/day-31.md` | Tag 31 Übungen |
 | `modules/04-cilium/days/day-31_SOLUTION.md` | Tag 31 Lösung |
+| `modules/04-cilium/days/day-32.md` | Tag 32 Übungen |
+| `modules/04-cilium/days/day-32_SOLUTION.md` | Tag 32 Lösung |
 | `modules/progress.md` | Alle abgeschlossenen Tage mit Learnings |

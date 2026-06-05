@@ -94,6 +94,17 @@
 
 > **Modul 03 pausiert** — offene Tage (22, 24–27, 29–30) als optional markiert. Weiter mit Modul 04 (Cilium CCA).
 
+### Tag 32 ✅ — Ch4: IPAM Part 1 (kubernetes vs. cluster-scope)
+- `cluster-pool` ist der interne Helm-Wert für cluster-scope (Default-Modus)
+- kubernetes-mode: kube-controller-manager teilt CIDRs zu, Cilium liest `.spec.podCIDR` vom Node
+- cluster-pool mode: Cilium Operator teilt CIDRs aus eigenem Pool zu — `.spec.podCIDR` auf dem Node gilt nicht
+- `cilium config view | grep ipam` — schnellster Check für den aktiven Modus
+- `kubectl get ciliumnodes -o jsonpath=...` ist die richtige Quelle für Pod-CIDRs in cluster-pool mode
+- Beweis: Pod-IPs kommen aus dem Cilium-CIDR (`10.0.x.0/24`), nicht aus dem Kubernetes-CIDR (`10.244.x.0/24`)
+- IPAM-Mode wechseln ist destruktiv — Day-0-Entscheidung
+
+---
+
 ### Tag 21 ✅ — Review: Netzwerk-Debugging Systematisch
 - OSI Bottom-Up Debugging: `ip link` → `ip addr` → `ip route` → Host-Konfiguration
 - `LOWERLAYERDOWN` = Peer des veth-Paares ist DOWN
