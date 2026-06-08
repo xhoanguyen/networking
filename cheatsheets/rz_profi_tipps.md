@@ -152,6 +152,34 @@ Cilium NetworkPolicies bauen auf Namespace-Isolation auf und fügen L3/L4/L7-Fil
 
 ---
 
+## Tag 32 — IPAM (Cilium)
+
+### IPAM-Mode dokumentieren vor jedem Eingriff
+```bash
+cilium config view | grep ipam
+```
+Bei Cluster-Migration oder Cilium-Neuinstallation immer zuerst den aktiven IPAM-Mode dokumentieren. Falscher Wechsel → alle Pods verlieren ihre IPs → komplette Produktionsunterbrechung.
+
+### Richtige Quelle für Pod-CIDRs je nach Modus
+
+| Modus | Richtige Quelle | Falsche Quelle |
+|-------|----------------|----------------|
+| kubernetes | `kubectl get nodes -o jsonpath=...spec.podCIDR` | — |
+| cluster-pool | `kubectl get ciliumnodes -o jsonpath=...spec.ipam.podCIDRs` | `kubectl get nodes .spec.podCIDR` |
+
+In cluster-pool mode liefert `kubectl get nodes` zwar CIDRs — aber die gelten nicht für Pods. Pods bekommen IPs aus dem Cilium-Pool.
+
+### CiliumNode neu erstellen bei fehlerhaftem IPAM-Sync
+```bash
+kubectl delete ciliumnodes <node-name>
+```
+Cilium Operator erstellt das CiliumNode-Objekt automatisch neu und weist eine frische CIDR zu. Erster Fix wenn ein Node nach einem Rebuild keine Pod-IPs mehr vergeben kann.
+
+### IPAM-Mode ist eine Day-0-Entscheidung
+Wechsel nach der Installation ist destruktiv — alle Pod-IPs ändern sich, Kubernetes muss alle Endpoints neu auflösen. Im RZ gilt: IPAM-Strategie vor der ersten Workload festlegen, nicht danach.
+
+---
+
 ## Tag 18 — NAT
 
 ### Packet-Counter als erster Debugging-Schritt
