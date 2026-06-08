@@ -94,6 +94,14 @@
 
 > **Modul 03 pausiert** — offene Tage (22, 24–27, 29–30) als optional markiert. Weiter mit Modul 04 (Cilium CCA).
 
+### Tag 33 ✅ — Ch4: IPAM Part 2 (Multi-Pool, ENI, Dual-Stack)
+- Multi-Pool IPAM: mehrere `CiliumPodIPPool` CRDs, Zuweisung via `ipam.cilium.io/ip-pool` Annotation auf Namespace
+- `maskSize` bestimmt die Block-Granularität pro Node — Nodes bekommen dynamisch weitere Blöcke wenn der aktuelle voll ist
+- Nodes können gleichzeitig Blöcke aus mehreren Pools halten (default + tenant-pool)
+- AWS ENI IPAM: Cilium delegiert IP-Verwaltung an EC2 API — nur für AWS, CCA-relevant
+- Dual-Stack: `ipFamily: dual` in Kind + `ipv6.enabled: true` — Kubernetes muss dual-stack enabled sein (CCA-relevant)
+- `kubectl wait --for=condition=Ready` ist der richtige Weg statt `sleep` — funktioniert für Nodes, Pods, beliebige Conditions
+
 ### Tag 32 ✅ — Ch4: IPAM Part 1 (kubernetes vs. cluster-scope)
 - `cluster-pool` ist der interne Helm-Wert für cluster-scope (Default-Modus)
 - kubernetes-mode: kube-controller-manager teilt CIDRs zu, Cilium liest `.spec.podCIDR` vom Node
