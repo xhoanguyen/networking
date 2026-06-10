@@ -16,6 +16,7 @@ Nach jeder Aufgabe oder Erklärung: einen konkreten Profi-Tipp geben, der die Ar
 ## Commit-Messages
 
 Kurz und einfach:
+- **Immer auf Englisch**
 - Erste Zeile: kurze Zusammenfassung (was wurde gemacht)
 - Kein Co-Authored-By, keine langen Beschreibungen
 - Vom User bestätigen lassen
@@ -70,33 +71,46 @@ Geplante Tage:
 Buch: *Cilium: Up and Running* von Nico Vibert, Filip Nikolic, James Laverack
 Repo: `/Users/xhoa/workspace/cilium-up-and-running/`
 
+**CCA Exam-Domains (Gewichtung):** Architecture 20% · Network Policy 18% · Service Mesh 16% · Observability 10% · Installation 10% · Cluster Mesh 10% · eBPF 10% · BGP & External Networking 6%
+
+**Regeln für dieses Modul:**
+- Nach jedem Tag: **RZ-Transfer-Block** in `CCA-exam.md` — "Wie ist das bei uns auf RKE2 konfiguriert?" (Antworten vom Platform-Team / `cilium config view` einarbeiten sobald verfügbar)
+- Flashcards aus `CCA-exam.md` generieren und in `flashcards/` pflegen — vor jedem Lab durchgehen
+- Exam-Ballast (AWS ENI, Azure IPAM, Dual-Stack) nur einmal verstehen, nicht vertiefen — Stack ist on-prem RKE2 ohne IPv6
+
 Geplante Tage:
 - Tag 31 ✅ — Ch3: Cilium Basics (Installation, kind, erste Network Policy)
 - Tag 32 ✅ — Ch4: IPAM Part 1 (kubernetes/cluster-scope Modi)
 - Tag 33 ✅ — Ch4: IPAM Part 2 (ENI, multi-pool, dual-stack)
 - Tag 34 — Ch5: Routing (Native Routing, GENEVE, Node-Routes)
-- Tag 34 — Ch5: Routing (Native Routing, GENEVE, Node-Routes)
 - Tag 35 — Ch6: kube-proxy Replacement Part 1
 - Tag 36 — Ch6: kube-proxy Replacement Part 2
 - Tag 37 — Ch6: kube-proxy Replacement Part 3 + Lab
-- Tag 38 — Ch7: Ingress & Gateway API
-- Tag 39 — Ch8: Load Balancing (DSR, Maglev, LRP)
-- Tag 40 — Ch9: Cluster Mesh Part 1
-- Tag 41 — Ch9: Cluster Mesh Part 2
-- Tag 42 — Ch9: Cluster Mesh Part 3 + Lab
-- Tag 43 — Ch10: L2/L3 Announcements
-- Tag 44 — Ch11: Egress Gateway & Bandwidth Manager
-- Tag 45 — Ch12: Network Policies Part 1
-- Tag 46 — Ch12: Network Policies Part 2
-- Tag 47 — Ch12: Network Policies Part 3 + Troubleshooting
-- Tag 48 — Ch13: DNS & FQDN Policies
-- Tag 49 — Ch14: Encryption (WireGuard/IPSec)
-- Tag 50 — Ch15: Hubble Observability Part 1
-- Tag 51 — Ch15: Hubble Observability Part 2
-- Tag 52 — Ch16: Metrics (Prometheus & Grafana)
-- Tag 53 — Gesamtreview Part 1 (Ch3–Ch9)
-- Tag 54 — Gesamtreview Part 2 (Ch10–Ch16)
-- Tag 55 — Mock Exam: CCA Prüfungssimulation
+- Tag 38 — Mini-Review Ch3–Ch6 + Flashcards anlegen (Quiz: 10 Fragen)
+- Tag 39 — Ch7: Ingress & Gateway API + Service-Mesh-Konzepte (sidecar vs. sidecar-less, mutual auth, warum Gateway API > Ingress) *(Exam: 16%-Domain)*
+- Tag 40 — Ch8: Load Balancing (DSR, Maglev, LRP)
+- Tag 41 — Ch9: Cluster Mesh Part 1
+- Tag 42 — Ch9: Cluster Mesh Part 2
+- Tag 43 — Ch9: Cluster Mesh Part 3 + Lab
+- Tag 44 — Ch10: L2 Announcements + LB-IPAM + **BGP-Konzepte** *(eigene Exam-Domain)*
+- Tag 45 — Lab: MetalLB L2-Mode vs. Cilium LB-IPAM/L2 Announcements *(Job-Transfer: MetalLB-Ablösung)*
+- Tag 46 — Ch11: Egress Gateway & Bandwidth Manager
+- Tag 47 — Ch12: Network Policies Part 1
+- Tag 48 — Ch12: Network Policies Part 2
+- Tag 49 — Ch12: Network Policies Part 3 + Troubleshooting
+- Tag 50 — Istio + Cilium: wer macht was? (mTLS-Schichten, L7-Policy-Zuständigkeit, Sidecar vs. CNI) *(Job-Transfer)*
+- Tag 51 — Ch13: DNS & FQDN Policies
+- Tag 52 — Mini-Review Ch7–Ch13 + Flashcards ergänzen (Quiz: 10 Fragen)
+- Tag 53 — Ch14: Encryption (WireGuard/IPSec, East-West vs. North-South)
+- Tag 54 — Ch15: Hubble Part 1 (CLI, L7-Visibility)
+- Tag 55 — Ch15: Hubble Part 2 + Lab: Policy-Drop systematisch debuggen *(häufigster RZ-Praxisfall)*
+- Tag 56 — Ch16: Metrics (Prometheus & Grafana)
+- Tag 57 — Cilium auf RKE2 (Multipass-VM, HelmChartConfig, kube-proxy-frei) *(Job-Transfer: Brücke kind → RKE2)*
+- Tag 58 — Gesamtreview Part 1 (Ch3–Ch9)
+- Tag 59 — Gesamtreview Part 2 (Ch10–Ch16)
+- Tag 60 — Mock Exam 1 + Lücken identifizieren
+- Tag 61 — Lücken aufarbeiten (schwächste Domains aus Mock 1)
+- Tag 62 — Mock Exam 2: finale CCA Prüfungssimulation
 
 ---
 
