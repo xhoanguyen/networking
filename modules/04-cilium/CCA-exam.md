@@ -97,3 +97,32 @@ kubectl get ciliumnode <node-name> -o yaml
 ```
 
 > Für RKE2 + Cilium: cluster-scope ist der empfohlene Default.
+
+---
+
+## Ch4 — IPAM Part 2 (Tag 33)
+
+### Multi-Pool IPAM
+- Mehrere `CiliumPodIPPool` CRDs — getrennte IP-Bereiche pro Tenant/Workload
+- Zuweisung via Annotation `ipam.cilium.io/ip-pool` auf Namespace (oder Pod)
+- IPAM ist eine **Day-0-Entscheidung** — Wechsel des Modus erfordert Cluster-Neuaufbau (alle Pod-IPs gehen verloren)
+
+```bash
+kubectl get ciliumpodippools
+kubectl get ciliumnodes -o json | jq '.items[] | {node: .metadata.name, pools: .spec.ipam.pools}'
+```
+
+### Block-Zuteilung
+- `maskSize` = Granularität der Blöcke pro Node (z.B. /27 = 32 Adressen)
+- **Kein Hard-Limit**: Ist ein Block voll, bekommt der Node dynamisch einen weiteren
+- `requested.needed` in `CiliumNode` = wie viele Adressen der Node aktuell anfordert
+- Ein Node kann gleichzeitig Blöcke aus **mehreren Pools** halten (z.B. `default` + `acme-pool`)
+
+### AWS ENI IPAM (nur Konzept)
+- Cilium delegiert IP-Verwaltung an die EC2 API — IPs sind physisch an ENIs gebunden
+- Exam-relevant, im RZ (on-prem) nicht
+
+### Dual-Stack (nur Konzept)
+- IPv4 + IPv6 gleichzeitig: `ipFamily: dual` in Kind + `ipv6.enabled: true` in Cilium
+- Voraussetzung: Kubernetes selbst muss dual-stack enabled sein (≥ v1.20)
+- Exam-relevant, im RZ ohne IPv6 nicht

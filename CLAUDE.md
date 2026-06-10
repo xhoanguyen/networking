@@ -75,7 +75,7 @@ Repo: `/Users/xhoa/workspace/cilium-up-and-running/`
 
 **Regeln für dieses Modul:**
 - Nach jedem Tag: **RZ-Transfer-Block** in `CCA-exam.md` — "Wie ist das bei uns auf RKE2 konfiguriert?" (Antworten vom Platform-Team / `cilium config view` einarbeiten sobald verfügbar)
-- Flashcards aus `CCA-exam.md` generieren und in `flashcards/` pflegen — vor jedem Lab durchgehen
+- Flashcards: vorhandene Karten in `flashcards/` **täglich vor dem Lab durchgehen**; neue Karten aus `CCA-exam.md` nur **alle 3 Tage** generieren (bzw. an Mini-Review-Tagen)
 - Exam-Ballast (AWS ENI, Azure IPAM, Dual-Stack) nur einmal verstehen, nicht vertiefen — Stack ist on-prem RKE2 ohne IPv6
 
 Geplante Tage:
@@ -140,6 +140,8 @@ Geplante Tage:
 | `modules/03-linux-networking-advanced/days/day-23_SOLUTION.md` | Tag 23 Lösung |
 | `modules/03-linux-networking-advanced/days/day-28_SOLUTION.md` | Tag 28 Lösung |
 | `modules/04-cilium/CCA-exam.md` | CCA Exam Notizen (wird täglich ergänzt) |
+| `modules/04-cilium/flashcards/ch3-cilium-basics.md` | Flashcards Ch3 (Tag 31) |
+| `modules/04-cilium/flashcards/ch4-ipam.md` | Flashcards Ch4 (Tag 32–33) |
 | `modules/04-cilium/days/day-31.md` | Tag 31 Übungen |
 | `modules/04-cilium/days/day-31_SOLUTION.md` | Tag 31 Lösung |
 | `modules/04-cilium/days/day-32.md` | Tag 32 Übungen |
