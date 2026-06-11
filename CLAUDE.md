@@ -38,7 +38,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 04 — Cilium: Up and Running (CCA Vorbereitung)
-**Tag:** 34 — Ch5: Routing (Native Routing, GENEVE, Node-Routes) (nächstes)
+**Tag:** 35 — Ch6: kube-proxy Replacement Part 1 (nächstes)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -82,7 +82,7 @@ Geplante Tage:
 - Tag 31 ✅ — Ch3: Cilium Basics (Installation, kind, erste Network Policy)
 - Tag 32 ✅ — Ch4: IPAM Part 1 (kubernetes/cluster-scope Modi)
 - Tag 33 ✅ — Ch4: IPAM Part 2 (ENI, multi-pool, dual-stack)
-- Tag 34 — Ch5: Routing (Native Routing, GENEVE, Node-Routes)
+- Tag 34 ✅ — Ch5: Routing (Native Routing, Tunnel-Modus, ipcache)
 - Tag 35 — Ch6: kube-proxy Replacement Part 1
 - Tag 36 — Ch6: kube-proxy Replacement Part 2
 - Tag 37 — Ch6: kube-proxy Replacement Part 3 + Lab
@@ -140,6 +140,7 @@ Geplante Tage:
 | `modules/03-linux-networking-advanced/days/day-23_SOLUTION.md` | Tag 23 Lösung |
 | `modules/03-linux-networking-advanced/days/day-28_SOLUTION.md` | Tag 28 Lösung |
 | `modules/04-cilium/CCA-exam.md` | CCA Exam Notizen (wird täglich ergänzt) |
+| `modules/04-cilium/cheatsheets/troubleshooting-playbook.md` | Cilium Troubleshooting-Playbook für RZ-Praxis (wächst mit echten Fällen) |
 | `modules/04-cilium/flashcards/ch3-cilium-basics.md` | Flashcards Ch3 (Tag 31) |
 | `modules/04-cilium/flashcards/ch4-ipam.md` | Flashcards Ch4 (Tag 32–33) |
 | `modules/04-cilium/days/day-31.md` | Tag 31 Übungen |
@@ -148,4 +149,6 @@ Geplante Tage:
 | `modules/04-cilium/days/day-32_SOLUTION.md` | Tag 32 Lösung |
 | `modules/04-cilium/days/day-33.md` | Tag 33 Übungen |
 | `modules/04-cilium/days/day-33_SOLUTION.md` | Tag 33 Lösung |
+| `modules/04-cilium/days/day-34.md` | Tag 34 Übungen |
+| `modules/04-cilium/days/day-34_SOLUTION.md` | Tag 34 Lösung |
 | `modules/progress.md` | Alle abgeschlossenen Tage mit Learnings |

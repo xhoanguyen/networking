@@ -94,6 +94,17 @@
 
 > **Modul 03 pausiert** — offene Tage (22, 24–27, 29–30) als optional markiert. Weiter mit Modul 04 (Cilium CCA).
 
+### Tag 34 ✅ — Ch5: Routing (Native Routing, Tunnel-Modus, ipcache)
+- Merksatz: Native legt die Routing-Intelligenz in die Kernel-Tabelle, Tunneling in die eBPF-Maps (ipcache)
+- Native: via-Routen zu **fremden Node-IPs** über eth0 — eine Route pro Remote-CIDR-Block, nicht pro Pod
+- Tunnel: nur **Trichter-Routen** auf die eigene cilium_host-IP — ipcache-Lookup liefert tunnelendpoint + identity
+- `cilium_vxlan` = eigenständiges Tunnel-Device (kein `@` in `ip link` = kein veth)
+- Outer-Paket trägt Node-IPs, Inner-Paket Pod-IPs → Underlay braucht keine Pod-CIDR-Routen
+- Ein Node tunnelt nie zu sich selbst — ipcache-Einträge ohne tunnelendpoint = lokaler Pod-CIDR
+- Troubleshooting-Fall: GENEVE-Device-Erstellung scheitert am Docker-Desktop-Kernel (`invalid argument`) — Compile-Fehler waren nur Folgesymptom; 3 Versionen probiert = Umgebungsproblem bewiesen → VXLAN-Fallback
+- `helm upgrade` ändert nur die ConfigMap — Agent liest Config nur beim Start → `rollout restart` nötig
+- Neu: [Troubleshooting-Playbook](04-cilium/cheatsheets/troubleshooting-playbook.md) für die RZ-Praxis angelegt
+
 ### Tag 33 ✅ — Ch4: IPAM Part 2 (Multi-Pool, ENI, Dual-Stack)
 - Multi-Pool IPAM: mehrere `CiliumPodIPPool` CRDs, Zuweisung via `ipam.cilium.io/ip-pool` Annotation auf Namespace
 - `maskSize` bestimmt die Block-Granularität pro Node — Nodes bekommen dynamisch weitere Blöcke wenn der aktuelle voll ist
