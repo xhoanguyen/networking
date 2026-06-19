@@ -38,7 +38,7 @@ Professionelle RZ-Sprache aktiv verwenden und einführen — z.B. "Netzwerk-Kont
 ## Aktueller Fortschritt
 
 **Modul:** 04 — Cilium: Up and Running (CCA Vorbereitung)
-**Tag:** 35 — Ch6: kube-proxy Replacement Part 1 (nächstes)
+**Tag:** 36 — Ch6: kube-proxy Replacement Part 2 (nächstes)
 **VM:** `multipass shell rz-node` — Interface heißt `enp0s1` (nicht `eth0`)
 
 ---
@@ -83,7 +83,7 @@ Geplante Tage:
 - Tag 32 ✅ — Ch4: IPAM Part 1 (kubernetes/cluster-scope Modi)
 - Tag 33 ✅ — Ch4: IPAM Part 2 (ENI, multi-pool, dual-stack)
 - Tag 34 ✅ — Ch5: Routing (Native Routing, Tunnel-Modus, ipcache)
-- Tag 35 — Ch6: kube-proxy Replacement Part 1
+- Tag 35 ✅ — Ch6: kube-proxy Replacement Part 1
 - Tag 36 — Ch6: kube-proxy Replacement Part 2
 - Tag 37 — Ch6: kube-proxy Replacement Part 3 + Lab
 - Tag 38 — Mini-Review Ch3–Ch6 + Flashcards anlegen (Quiz: 10 Fragen)
@@ -151,4 +151,6 @@ Geplante Tage:
 | `modules/04-cilium/days/day-33_SOLUTION.md` | Tag 33 Lösung |
 | `modules/04-cilium/days/day-34.md` | Tag 34 Übungen |
 | `modules/04-cilium/days/day-34_SOLUTION.md` | Tag 34 Lösung |
+| `modules/04-cilium/days/day-35.md` | Tag 35 Übungen |
+| `modules/04-cilium/days/day-35_SOLUTION.md` | Tag 35 Lösung |
 | `modules/progress.md` | Alle abgeschlossenen Tage mit Learnings |
