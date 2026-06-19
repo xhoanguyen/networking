@@ -94,6 +94,16 @@
 
 > **Modul 03 pausiert** — offene Tage (22, 24–27, 29–30) als optional markiert. Weiter mit Modul 04 (Cilium CCA).
 
+### Tag 35 ✅ — Ch6: kube-proxy Replacement Part 1
+- *Agent schreibt, eBPF liest* — cilium-agent (Control Plane) watcht EndpointSlices und schreibt die eBPF-Service-Map; das eBPF-Programm (Data Plane) liest sie nur bei `connect()`. Gleiche Logik wie kube-proxy, nur Ziel = eBPF-Map statt iptables-Ketten
+- Aktivieren: Helm-Value `kubeProxyReplacement=true` + Cluster ohne kube-proxy bauen (kind: `kubeProxyMode: "none"`)
+- Henne-Ei beim Bootstrap: ohne kube-proxy übersetzt niemand die `kubernetes`-ClusterIP → `k8sServiceHost`/`k8sServicePort` direkt mitgeben, sonst CrashLoopBackOff
+- Beweis auf 3 Ebenen: kein kube-proxy-DS · `iptables-save | grep -c KUBE-SVC` = 0 · `cilium status` → `KubeProxyReplacement: True`
+- eBPF-Service-Map (`cilium-dbg service list`) = das `grep KUBE-SVC` der eBPF-Welt: Frontend = ClusterIP, Backends = Pod-IPs. Zwei IP-Welten: `10.0.x.x` = Pod-IP, `172.18.0.x` = Node-IP → Backend mit Node-IP = host-network-Pod
+- Scale → Map wird **inkrementell** aktualisiert (bestehende Backends bleiben), nicht Full-Reload wie iptables
+- Hook-Wahl, die eine Frage: *Wer ruft `connect()` auf?* Lokaler Pod → **Socket-LB** (von innen, beim Verbindungsaufbau) · externer Client → **tc/XDP** (von außen, am eth0). Backend-Standort egal
+- **Sollzustand ≠ Istzustand:** `config view` zeigte `bpf-lb-sock false`, `cilium-dbg status --verbose` aber `Socket LB: Enabled` — Runtime gewinnt. Zum Beweisen, was läuft → immer `cilium-dbg status --verbose`
+
 ### Tag 34 ✅ — Ch5: Routing (Native Routing, Tunnel-Modus, ipcache)
 - Merksatz: Native legt die Routing-Intelligenz in die Kernel-Tabelle, Tunneling in die eBPF-Maps (ipcache)
 - Native: via-Routen zu **fremden Node-IPs** über eth0 — eine Route pro Remote-CIDR-Block, nicht pro Pod

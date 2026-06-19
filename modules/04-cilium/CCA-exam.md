@@ -196,3 +196,51 @@ kubectl -n kube-system exec ds/cilium -- cilium-dbg bpf ipcache list
 > Fahren wir auf RKE2 Native Routing oder Tunneling — und falls Tunnel: VXLAN oder GENEVE?
 > Falls Native: announcen wir die Pod-CIDRs per BGP oder reicht `autoDirectNodeRoutes` (gleiche L2-Domain)?
 > *(Antwort einarbeiten sobald verfügbar — `cilium config view | grep -E "routing|tunnel"`)*
+
+---
+
+## Ch6 — kube-proxy Replacement Part 1 (Tag 35)
+
+### Wer macht das Service-LB?
+- **kube-proxy** (klassisch): Control Plane watcht API-Server → schreibt `KUBE-SVC-*`-Ketten in iptables. Kernel/netfilter macht DNAT **pro Paket** + conntrack. Lineare Liste, O(n), Full-Reload bei jedem Update.
+- **Cilium Replacement**: cilium-agent (Control Plane) watcht EndpointSlices → schreibt die **eBPF-Service-Map**. Hash-Lookup O(1), **inkrementelles** Update (nur der geänderte Eintrag). Merke: *Agent schreibt, eBPF liest* — in beiden Welten, nur das Ziel unterscheidet sich (iptables-Ketten vs. eBPF-Map).
+
+### Aktivieren
+- Helm-Value: **`kubeProxyReplacement=true`** (ab v1.14 nur noch `true`/`false`, früher `strict`/`partial`/`disabled`)
+- Cluster muss **ohne** kube-proxy gebaut werden (kind: `kubeProxyMode: "none"`), sonst streiten sich beide um die Service-Regeln
+
+### Henne-Ei beim Bootstrap
+- Ohne kube-proxy übersetzt niemand die `kubernetes`-ClusterIP (`10.96.0.1:443`) auf den echten API-Server. Der Agent braucht den API-Server aber, **bevor** er Services programmiert.
+- Lösung: `k8sServiceHost` (API-Server-Host, bei kind der Control-Plane-Container-Name) + `k8sServicePort=6443` direkt mitgeben. Symptom bei Fehlen: Agent `CrashLoopBackOff` mit "connection refused" zur ClusterIP.
+
+### Beweis auf 3 Ebenen
+1. Workload: `kubectl -n kube-system get ds kube-proxy` → `NotFound`
+2. Kernel: `iptables-save | grep -c KUBE-SVC` → `0`
+3. Cilium: `cilium status | grep KubeProxyReplacement` → `True [eth0 ...]`
+
+### eBPF-Service-Map lesen
+```bash
+kubectl -n kube-system exec ds/cilium -- cilium-dbg service list
+```
+- **Frontend = ClusterIP/NodePort, Backends = echte Pod-IPs.** Das `iptables-save | grep KUBE-SVC` der eBPF-Welt.
+- Zwei IP-Welten als Klassifikator: `10.0.x.x` = Pod-IP (aus IPAM) · `172.18.0.x` = Node-IP (kind-Underlay) → Backend mit Node-IP = **host-network-Pod** (API-Server, hubble-peer …)
+- Scale → endpointslice-controller schreibt EndpointSlices → Agent aktualisiert die Map **inkrementell** (bestehende Backends bleiben, neue kommen dazu)
+
+### Hook-Wahl: Socket-LB vs. tc/XDP
+Die **eine** Frage: *Wer ruft `connect()` auf?*
+- **Lokaler Pod auf dem Node → Socket-LB** (cgroup/socket-Hook, übersetzt beim Verbindungsaufbau, kein per-Paket-DNAT). „von innen"
+- **Externer Client → tc/XDP** (fängt das fertige Paket am `eth0`-Ingress ab). „von außen"
+- Backend-Standort ist **irrelevant** für den Hook — das ist eine separate Achse (Paket-Pfad/Routing, Ch5).
+
+### Verifizieren — Sollzustand ≠ Istzustand
+```bash
+kubectl -n kube-system exec ds/cilium -- cilium-dbg status --verbose   # KubeProxyReplacement Details
+```
+- `cilium config view | grep bpf-lb-sock` kann `false` zeigen, obwohl Socket-LB **läuft** — das ist nur der ungesetzte Override-Knopf. Die Runtime (`Socket LB: Enabled`, `Coverage: Full`) ist die Wahrheit.
+- Der verbose-Block liefert auch: `Mode: SNAT` (vs. DSR → Ch8), `Backend Selection: Random` (vs. Maglev → Ch8), `Devices: eth0 (Direct Routing)`, `XDP Acceleration: Disabled` (also tc-Hook, nicht hardware-XDP), und alle aktiven Service-Typen (ClusterIP/NodePort 30000-32767/LoadBalancer/externalIPs/HostPort).
+
+### RZ-Transfer (Frage ans Platform-Team)
+> Fahren wir auf RKE2 mit `kubeProxyReplacement=true` (kube-proxy-frei) oder läuft kube-proxy noch parallel?
+> Falls kube-proxy-frei: wie ist der Bootstrap gelöst (`k8sServiceHost`/`k8sServicePort` bzw. kube-vip/HA-Endpoint)?
+> Welcher LB-`Mode` (SNAT oder DSR) und welche Backend-Selection (Random oder Maglev)?
+> *(Verifizieren: `cilium-dbg status --verbose` → `KubeProxyReplacement Details` — nicht `config view`)*
